@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://arzanfinance.github.io/sitemap.xml
