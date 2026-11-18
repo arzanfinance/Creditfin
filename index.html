@@ -2656,9 +2656,9 @@
 
         <div class="card" style="background:var(--color-navy); color:#fff; border:1px solid rgba(197,160,89,0.4); margin-bottom:24px; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:16px;">
           <div>
-            <span class="eyebrow-label" style="color:var(--color-gold-light); margin-bottom:4px;">Recommended · All 20 Files in One Package</span>
+            <span class="eyebrow-label" style="color:var(--color-gold-light); margin-bottom:4px;">Recommended · All 21 Files in One Package</span>
             <h2 style="font-size:1.65rem; color:#fff; margin-bottom:4px;">One-Click Full Website Bundle (.ZIP)</h2>
-            <p style="font-size:0.86rem; color:#cbd5e1;">Downloads index.html, 404.html, .nojekyll, robots.txt, sitemap.xml, PWA files, icons, and all 8 Kuwait &amp; editorial photographs inside one ZIP ready to extract &amp; upload to GitHub.</p>
+            <p style="font-size:0.86rem; color:#cbd5e1;">Downloads index.html, 404.html, .nojekyll, robots.txt, sitemap.xml, Google verification HTML, PWA files, icons, and all 8 Kuwait &amp; editorial photographs inside one ZIP ready to extract &amp; upload to GitHub.</p>
           </div>
           <div style="display:flex; gap:10px; flex-wrap:wrap; align-items:center;">
             <a id="direct-zip-link" href="./arzan-website-bundle.zip?dl=1" data-dl-name="arzan-website-bundle.zip" download="arzan-website-bundle.zip" class="btn btn-gold aim-dl-asset" style="padding:13px 24px;" onclick="showToast('Starting arzan-website-bundle.zip download...')">⬇ Download Full Website Bundle (.ZIP)</a>
@@ -2672,6 +2672,7 @@
             <p style="font-size:0.86rem; color:var(--color-text-muted); margin-bottom:14px;">Complete single-file portal, manifest, service worker &amp; Google Search files.</p>
             <div style="display:grid; gap:8px;">
               <a id="direct-html-link" href="./arzan-standalone.html?dl=1" data-dl-name="index.html" download="index.html" class="btn btn-primary aim-dl-asset">⬇ Download index.html</a>
+              <a href="./google72250fe6f7040487.html?dl=1" data-dl-name="google72250fe6f7040487.html" download="google72250fe6f7040487.html" class="btn btn-outline aim-dl-asset">⬇ google72250fe6f7040487.html (Google Verify)</a>
               <a id="direct-manifest-link" href="./manifest.webmanifest?dl=1" data-dl-name="manifest.webmanifest" download="manifest.webmanifest" class="btn btn-outline aim-dl-asset">⬇ manifest.webmanifest</a>
               <a id="direct-sw-link" href="./sw.js?dl=1" data-dl-name="sw.js" download="sw.js" class="btn btn-outline aim-dl-asset">⬇ sw.js</a>
               <a href="./robots.txt?dl=1" data-dl-name="robots.txt" download="robots.txt" class="btn btn-outline aim-dl-asset">⬇ robots.txt (Google)</a>
@@ -4791,6 +4792,7 @@
           { name: 'index.html', data: enc.encode(htmlText) },
           { name: '404.html', data: enc.encode(htmlText) },
           { name: '.nojekyll', data: new Uint8Array(0) },
+          { name: 'google72250fe6f7040487.html', data: enc.encode('google-site-verification: google72250fe6f7040487.html') },
           { name: 'robots.txt', data: enc.encode(robotsText) },
           { name: 'sitemap.xml', data: enc.encode(sitemapText) },
           { name: 'manifest.webmanifest', data: enc.encode(buildStandaloneManifestText()) },
