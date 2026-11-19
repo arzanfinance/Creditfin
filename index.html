@@ -42320,6 +42320,9 @@ var AdminConsole = ({ mode, onLoginSuccess, onLogout, onShowToast }) => {
 		try {
 			const updated = {
 				...editForm,
+				fullName: editForm.fullName.trim(),
+				email: editForm.email.trim().toLowerCase(),
+				bankIfsc: editForm.bankIfsc.trim().toUpperCase(),
 				loanAmount: Number(editForm.loanAmount || 0),
 				tenure: Number(editForm.tenure || 24),
 				walletBalance: Number(editForm.walletBalance || 0),
@@ -42766,163 +42769,442 @@ var AdminConsole = ({ mode, onLoginSuccess, onLogout, onShowToast }) => {
 								})]
 							}),
 							/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-								className: "grid grid-cols-2 gap-3 text-xs",
-								children: [
-									/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("label", {
-										className: "block font-semibold text-[#526071] mb-1",
-										children: "Underwriting Status"
-									}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("select", {
-										value: editForm.status,
-										onChange: (e) => setEditForm({
-											...editForm,
-											status: e.target.value
-										}),
-										className: "w-full px-2.5 py-2 rounded border border-[rgba(8,27,51,0.18)] bg-white text-[#081b33]",
-										children: [
-											/* @__PURE__ */ (0, import_jsx_runtime.jsx)("option", {
-												value: "Under Review",
-												children: "Under Review"
-											}),
-											/* @__PURE__ */ (0, import_jsx_runtime.jsx)("option", {
-												value: "Approved",
-												children: "Approved"
-											}),
-											/* @__PURE__ */ (0, import_jsx_runtime.jsx)("option", {
-												value: "Disbursed",
-												children: "Disbursed"
-											}),
-											/* @__PURE__ */ (0, import_jsx_runtime.jsx)("option", {
-												value: "Hold",
-												children: "Hold"
-											}),
-											/* @__PURE__ */ (0, import_jsx_runtime.jsx)("option", {
-												value: "Cancelled",
-												children: "Cancelled"
-											}),
-											/* @__PURE__ */ (0, import_jsx_runtime.jsx)("option", {
-												value: "Rejected",
-												children: "Rejected"
-											})
-										]
-									})] }),
-									/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("label", {
-										className: "block font-semibold text-[#526071] mb-1",
-										children: "Wallet Clearing State"
-									}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("select", {
-										value: editForm.walletLock,
-										onChange: (e) => setEditForm({
-											...editForm,
-											walletLock: e.target.value
-										}),
-										className: "w-full px-2.5 py-2 rounded border border-[rgba(8,27,51,0.18)] bg-white text-[#081b33]",
-										children: [
-											/* @__PURE__ */ (0, import_jsx_runtime.jsx)("option", {
-												value: "unlocked",
-												children: "unlocked (Ready for PIN)"
-											}),
-											/* @__PURE__ */ (0, import_jsx_runtime.jsx)("option", {
-												value: "verifying",
-												children: "verifying (5-min timer)"
-											}),
-											/* @__PURE__ */ (0, import_jsx_runtime.jsx)("option", {
-												value: "failed",
-												children: "failed (Details Incorrect)"
-											})
-										]
-									})] }),
-									/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("label", {
-										className: "block font-semibold text-[#526071] mb-1",
-										children: "Wallet Balance (KWD)"
-									}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("input", {
-										type: "number",
-										min: 0,
-										value: editForm.walletBalance,
-										onChange: (e) => setEditForm({
-											...editForm,
-											walletBalance: Number(e.target.value)
-										}),
-										className: "w-full px-2.5 py-2 rounded border border-[rgba(8,27,51,0.18)] tabular-nums text-[#081b33]"
-									})] }),
-									/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("label", {
-										className: "block font-semibold text-[#526071] mb-1",
-										children: "Withdrawal PIN"
-									}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("input", {
-										type: "text",
-										value: editForm.withdrawalPin,
-										onChange: (e) => setEditForm({
-											...editForm,
-											withdrawalPin: e.target.value
-										}),
-										className: "w-full px-2.5 py-2 rounded border border-[rgba(8,27,51,0.18)] font-mono text-[#081b33]"
-									})] }),
-									/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("label", {
-										className: "block font-semibold text-[#526071] mb-1",
-										children: "Loan Amount (KWD)"
-									}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("input", {
-										type: "number",
-										value: editForm.loanAmount,
-										onChange: (e) => setEditForm({
-											...editForm,
-											loanAmount: Number(e.target.value)
-										}),
-										className: "w-full px-2.5 py-2 rounded border border-[rgba(8,27,51,0.18)] tabular-nums text-[#081b33]"
-									})] }),
-									/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("label", {
-										className: "block font-semibold text-[#526071] mb-1",
-										children: "Tenure (Months)"
-									}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("input", {
-										type: "number",
-										value: editForm.tenure,
-										onChange: (e) => setEditForm({
-											...editForm,
-											tenure: Number(e.target.value)
-										}),
-										className: "w-full px-2.5 py-2 rounded border border-[rgba(8,27,51,0.18)] tabular-nums text-[#081b33]"
-									})] }),
-									/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-										className: "col-span-2",
-										children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("label", {
-											className: "block font-semibold text-[#526071] mb-1",
-											children: "Bank & IBAN"
-										}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-											className: "grid grid-cols-2 gap-2",
-											children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("input", {
-												type: "text",
-												value: editForm.bankAcc,
-												onChange: (e) => setEditForm({
-													...editForm,
-													bankAcc: e.target.value
-												}),
-												placeholder: "Account No",
-												className: "px-2.5 py-2 rounded border border-[rgba(8,27,51,0.18)] font-mono text-[#081b33]"
+								className: "space-y-2",
+								children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
+									className: "text-[11px] font-semibold uppercase tracking-wider text-[#a9833d]",
+									children: "Applicant & Portal Credentials (Editable)"
+								}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+									className: "grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs",
+									children: [
+										/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+											className: "sm:col-span-2",
+											children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("label", {
+												className: "block font-semibold text-[#526071] mb-1",
+												children: "Full Legal Name"
 											}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("input", {
 												type: "text",
-												value: editForm.bankIfsc,
+												value: editForm.fullName,
 												onChange: (e) => setEditForm({
 													...editForm,
-													bankIfsc: e.target.value
+													fullName: e.target.value
 												}),
-												placeholder: "IBAN",
-												className: "px-2.5 py-2 rounded border border-[rgba(8,27,51,0.18)] font-mono text-[#081b33]"
+												className: "w-full px-2.5 py-2 rounded border border-[rgba(8,27,51,0.18)] text-[#081b33]"
 											})]
-										})]
-									}),
-									/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-										className: "col-span-2",
-										children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("label", {
+										}),
+										/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("label", {
 											className: "block font-semibold text-[#526071] mb-1",
-											children: "Officer Remarks"
-										}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("textarea", {
-											rows: 2,
-											value: editForm.remarks,
+											children: "Client Email ID"
+										}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("input", {
+											type: "email",
+											value: editForm.email,
 											onChange: (e) => setEditForm({
 												...editForm,
-												remarks: e.target.value
+												email: e.target.value
 											}),
 											className: "w-full px-2.5 py-2 rounded border border-[rgba(8,27,51,0.18)] text-[#081b33]"
+										})] }),
+										/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("label", {
+											className: "block font-semibold text-[#526071] mb-1",
+											children: "Client Portal Password"
+										}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("input", {
+											type: "text",
+											value: editForm.password,
+											onChange: (e) => setEditForm({
+												...editForm,
+												password: e.target.value
+											}),
+											className: "w-full px-2.5 py-2 rounded border border-[rgba(8,27,51,0.18)] font-mono text-[#081b33]"
+										})] }),
+										/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("label", {
+											className: "block font-semibold text-[#526071] mb-1",
+											children: "Kuwait Mobile"
+										}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("input", {
+											type: "text",
+											value: editForm.phone,
+											onChange: (e) => setEditForm({
+												...editForm,
+												phone: e.target.value
+											}),
+											className: "w-full px-2.5 py-2 rounded border border-[rgba(8,27,51,0.18)] text-[#081b33]"
+										})] }),
+										/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("label", {
+											className: "block font-semibold text-[#526071] mb-1",
+											children: "Date of Birth"
+										}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("input", {
+											type: "date",
+											value: editForm.dob || "",
+											onChange: (e) => setEditForm({
+												...editForm,
+												dob: e.target.value
+											}),
+											className: "w-full px-2.5 py-2 rounded border border-[rgba(8,27,51,0.18)] text-[#081b33]"
+										})] }),
+										/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("label", {
+											className: "block font-semibold text-[#526071] mb-1",
+											children: "12-Digit Civil ID"
+										}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("input", {
+											type: "text",
+											value: editForm.aadhaar,
+											onChange: (e) => setEditForm({
+												...editForm,
+												aadhaar: e.target.value
+											}),
+											className: "w-full px-2.5 py-2 rounded border border-[rgba(8,27,51,0.18)] font-mono text-[#081b33]"
+										})] }),
+										/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("label", {
+											className: "block font-semibold text-[#526071] mb-1",
+											children: "Governorate"
+										}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("input", {
+											type: "text",
+											value: editForm.governorate,
+											onChange: (e) => setEditForm({
+												...editForm,
+												governorate: e.target.value
+											}),
+											className: "w-full px-2.5 py-2 rounded border border-[rgba(8,27,51,0.18)] text-[#081b33]"
+										})] }),
+										/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+											className: "sm:col-span-2",
+											children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("label", {
+												className: "block font-semibold text-[#526071] mb-1",
+												children: "Residential Address"
+											}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("input", {
+												type: "text",
+												value: editForm.address,
+												onChange: (e) => setEditForm({
+													...editForm,
+													address: e.target.value
+												}),
+												className: "w-full px-2.5 py-2 rounded border border-[rgba(8,27,51,0.18)] text-[#081b33]"
+											})]
+										}),
+										/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("label", {
+											className: "block font-semibold text-[#526071] mb-1",
+											children: "Employment Type"
+										}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("input", {
+											type: "text",
+											value: editForm.employmentStatus,
+											onChange: (e) => setEditForm({
+												...editForm,
+												employmentStatus: e.target.value
+											}),
+											className: "w-full px-2.5 py-2 rounded border border-[rgba(8,27,51,0.18)] text-[#081b33]"
+										})] }),
+										/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("label", {
+											className: "block font-semibold text-[#526071] mb-1",
+											children: "Monthly Income (KWD)"
+										}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("input", {
+											type: "number",
+											value: editForm.monthlyIncome,
+											onChange: (e) => setEditForm({
+												...editForm,
+												monthlyIncome: Number(e.target.value)
+											}),
+											className: "w-full px-2.5 py-2 rounded border border-[rgba(8,27,51,0.18)] tabular-nums text-[#081b33]"
+										})] })
+									]
+								})]
+							}),
+							/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+								className: "space-y-2 pt-3 border-t border-[rgba(8,27,51,0.08)]",
+								children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
+									className: "text-[11px] font-semibold uppercase tracking-wider text-[#a9833d]",
+									children: "Underwriting, Wallet & Withdrawal PIN"
+								}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+									className: "grid grid-cols-2 gap-3 text-xs",
+									children: [
+										/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("label", {
+											className: "block font-semibold text-[#526071] mb-1",
+											children: "Underwriting Status"
+										}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("select", {
+											value: editForm.status,
+											onChange: (e) => setEditForm({
+												...editForm,
+												status: e.target.value
+											}),
+											className: "w-full px-2.5 py-2 rounded border border-[rgba(8,27,51,0.18)] bg-white text-[#081b33]",
+											children: [
+												/* @__PURE__ */ (0, import_jsx_runtime.jsx)("option", {
+													value: "Under Review",
+													children: "Under Review"
+												}),
+												/* @__PURE__ */ (0, import_jsx_runtime.jsx)("option", {
+													value: "Approved",
+													children: "Approved"
+												}),
+												/* @__PURE__ */ (0, import_jsx_runtime.jsx)("option", {
+													value: "Disbursed",
+													children: "Disbursed"
+												}),
+												/* @__PURE__ */ (0, import_jsx_runtime.jsx)("option", {
+													value: "Hold",
+													children: "Hold"
+												}),
+												/* @__PURE__ */ (0, import_jsx_runtime.jsx)("option", {
+													value: "Cancelled",
+													children: "Cancelled"
+												}),
+												/* @__PURE__ */ (0, import_jsx_runtime.jsx)("option", {
+													value: "Rejected",
+													children: "Rejected"
+												})
+											]
+										})] }),
+										/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("label", {
+											className: "block font-semibold text-[#526071] mb-1",
+											children: "Wallet Clearing State"
+										}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("select", {
+											value: editForm.walletLock,
+											onChange: (e) => setEditForm({
+												...editForm,
+												walletLock: e.target.value
+											}),
+											className: "w-full px-2.5 py-2 rounded border border-[rgba(8,27,51,0.18)] bg-white text-[#081b33]",
+											children: [
+												/* @__PURE__ */ (0, import_jsx_runtime.jsx)("option", {
+													value: "unlocked",
+													children: "unlocked (Ready for PIN)"
+												}),
+												/* @__PURE__ */ (0, import_jsx_runtime.jsx)("option", {
+													value: "verifying",
+													children: "verifying (5-min timer)"
+												}),
+												/* @__PURE__ */ (0, import_jsx_runtime.jsx)("option", {
+													value: "failed",
+													children: "failed (Details Incorrect)"
+												})
+											]
+										})] }),
+										/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("label", {
+											className: "block font-semibold text-[#526071] mb-1",
+											children: "Wallet Balance (KWD)"
+										}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("input", {
+											type: "number",
+											min: 0,
+											value: editForm.walletBalance,
+											onChange: (e) => setEditForm({
+												...editForm,
+												walletBalance: Number(e.target.value)
+											}),
+											className: "w-full px-2.5 py-2 rounded border border-[rgba(8,27,51,0.18)] tabular-nums text-[#081b33]"
+										})] }),
+										/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("label", {
+											className: "block font-semibold text-[#526071] mb-1",
+											children: "Withdrawal PIN"
+										}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("input", {
+											type: "text",
+											value: editForm.withdrawalPin,
+											onChange: (e) => setEditForm({
+												...editForm,
+												withdrawalPin: e.target.value
+											}),
+											className: "w-full px-2.5 py-2 rounded border border-[rgba(8,27,51,0.18)] font-mono text-[#081b33]"
+										})] }),
+										/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("label", {
+											className: "block font-semibold text-[#526071] mb-1",
+											children: "Loan Amount (KWD)"
+										}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("input", {
+											type: "number",
+											value: editForm.loanAmount,
+											onChange: (e) => setEditForm({
+												...editForm,
+												loanAmount: Number(e.target.value)
+											}),
+											className: "w-full px-2.5 py-2 rounded border border-[rgba(8,27,51,0.18)] tabular-nums text-[#081b33]"
+										})] }),
+										/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("label", {
+											className: "block font-semibold text-[#526071] mb-1",
+											children: "Tenure (Months)"
+										}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("input", {
+											type: "number",
+											value: editForm.tenure,
+											onChange: (e) => setEditForm({
+												...editForm,
+												tenure: Number(e.target.value)
+											}),
+											className: "w-full px-2.5 py-2 rounded border border-[rgba(8,27,51,0.18)] tabular-nums text-[#081b33]"
+										})] })
+									]
+								})]
+							}),
+							/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+								className: "space-y-2 pt-3 border-t border-[rgba(8,27,51,0.08)]",
+								children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
+									className: "text-[11px] font-semibold uppercase tracking-wider text-[#a9833d]",
+									children: "Banking, Guarantor & Compliance"
+								}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+									className: "grid grid-cols-2 gap-3 text-xs",
+									children: [
+										/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+											className: "col-span-2",
+											children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("label", {
+												className: "block font-semibold text-[#526071] mb-1",
+												children: "Bank Name"
+											}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("input", {
+												type: "text",
+												value: editForm.bankName,
+												onChange: (e) => setEditForm({
+													...editForm,
+													bankName: e.target.value
+												}),
+												className: "w-full px-2.5 py-2 rounded border border-[rgba(8,27,51,0.18)] text-[#081b33]"
+											})]
+										}),
+										/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("label", {
+											className: "block font-semibold text-[#526071] mb-1",
+											children: "Account No"
+										}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("input", {
+											type: "text",
+											value: editForm.bankAcc,
+											onChange: (e) => setEditForm({
+												...editForm,
+												bankAcc: e.target.value
+											}),
+											className: "w-full px-2.5 py-2 rounded border border-[rgba(8,27,51,0.18)] font-mono text-[#081b33]"
+										})] }),
+										/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("label", {
+											className: "block font-semibold text-[#526071] mb-1",
+											children: "Kuwait IBAN"
+										}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("input", {
+											type: "text",
+											value: editForm.bankIfsc,
+											onChange: (e) => setEditForm({
+												...editForm,
+												bankIfsc: e.target.value
+											}),
+											className: "w-full px-2.5 py-2 rounded border border-[rgba(8,27,51,0.18)] font-mono text-[#081b33]"
+										})] }),
+										/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("label", {
+											className: "block font-semibold text-[#526071] mb-1",
+											children: "Guarantor Name"
+										}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("input", {
+											type: "text",
+											value: editForm.nomineeName,
+											onChange: (e) => setEditForm({
+												...editForm,
+												nomineeName: e.target.value
+											}),
+											className: "w-full px-2.5 py-2 rounded border border-[rgba(8,27,51,0.18)] text-[#081b33]"
+										})] }),
+										/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("label", {
+											className: "block font-semibold text-[#526071] mb-1",
+											children: "Guarantor Mobile"
+										}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("input", {
+											type: "text",
+											value: editForm.nomineePhone,
+											onChange: (e) => setEditForm({
+												...editForm,
+												nomineePhone: e.target.value
+											}),
+											className: "w-full px-2.5 py-2 rounded border border-[rgba(8,27,51,0.18)] text-[#081b33]"
+										})] }),
+										/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("label", {
+											className: "block font-semibold text-[#526071] mb-1",
+											children: "Face Biometric Status"
+										}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("input", {
+											type: "text",
+											value: editForm.faceVerificationStatus,
+											onChange: (e) => setEditForm({
+												...editForm,
+												faceVerificationStatus: e.target.value
+											}),
+											className: "w-full px-2.5 py-2 rounded border border-[rgba(8,27,51,0.18)] text-[#081b33]"
+										})] }),
+										/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("label", {
+											className: "block font-semibold text-[#526071] mb-1",
+											children: "Cancellation Status"
+										}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("input", {
+											type: "text",
+											value: editForm.cancellationStatus,
+											onChange: (e) => setEditForm({
+												...editForm,
+												cancellationStatus: e.target.value
+											}),
+											className: "w-full px-2.5 py-2 rounded border border-[rgba(8,27,51,0.18)] text-[#081b33]"
+										})] }),
+										editForm.cancellationReason && /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+											className: "col-span-2",
+											children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("label", {
+												className: "block font-semibold text-[#526071] mb-1",
+												children: "Cancellation Reason"
+											}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("input", {
+												type: "text",
+												value: editForm.cancellationReason,
+												onChange: (e) => setEditForm({
+													...editForm,
+													cancellationReason: e.target.value
+												}),
+												className: "w-full px-2.5 py-2 rounded border border-[rgba(8,27,51,0.18)] text-[#081b33]"
+											})]
+										}),
+										/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+											className: "col-span-2",
+											children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("label", {
+												className: "block font-semibold text-[#526071] mb-1",
+												children: "Officer Remarks"
+											}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("textarea", {
+												rows: 2,
+												value: editForm.remarks,
+												onChange: (e) => setEditForm({
+													...editForm,
+													remarks: e.target.value
+												}),
+												className: "w-full px-2.5 py-2 rounded border border-[rgba(8,27,51,0.18)] text-[#081b33]"
+											})]
+										})
+									]
+								})]
+							}),
+							/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+								className: "pt-3 border-t border-[rgba(8,27,51,0.08)] space-y-2",
+								children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+									className: "flex items-center justify-between",
+									children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
+										className: "text-[11px] font-semibold uppercase tracking-wider text-[#a9833d]",
+										children: "KYC & Live Face Evidence"
+									}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("button", {
+										type: "button",
+										onClick: () => setDocsPreviewClient(editForm),
+										className: "text-[11px] font-semibold text-[#081b33] hover:text-[#a9833d]",
+										children: "Expand Full View →"
+									})]
+								}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+									className: "grid grid-cols-4 gap-2",
+									children: [
+										{
+											label: "ID Front",
+											src: editForm.docs?.clientAadhaarFront
+										},
+										{
+											label: "ID Back",
+											src: editForm.docs?.clientAadhaarBack
+										},
+										{
+											label: "Guarantor",
+											src: editForm.docs?.nomineeAadhaarFront
+										},
+										{
+											label: "Live Face",
+											src: editForm.docs?.faceVerification
+										}
+									].map((item) => /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("button", {
+										type: "button",
+										onClick: () => setDocsPreviewClient(editForm),
+										className: "rounded-lg border border-[rgba(8,27,51,0.15)] overflow-hidden bg-[#f7f8fa] text-center",
+										children: [item.src ? /* @__PURE__ */ (0, import_jsx_runtime.jsx)("img", {
+											src: item.src,
+											alt: item.label,
+											referrerPolicy: "no-referrer",
+											className: "w-full h-14 object-cover"
+										}) : /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+											className: "h-14 flex items-center justify-center text-[10px] text-[#526071]",
+											children: "None"
+										}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+											className: "block py-1 text-[10px] font-medium text-[#081b33] bg-white",
+											children: item.label
 										})]
-									})
-								]
+									}, item.label))
+								})]
 							}),
 							/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
 								className: "flex flex-col gap-2 pt-2",
@@ -42935,7 +43217,7 @@ var AdminConsole = ({ mode, onLoginSuccess, onLogout, onShowToast }) => {
 									type: "submit",
 									disabled: savingClient,
 									className: "w-full py-2.5 rounded-md bg-[#081b33] hover:bg-[#102a4a] text-white text-xs font-semibold disabled:opacity-60",
-									children: savingClient ? "Saving & Syncing..." : "Save Changes to Cloud"
+									children: savingClient ? "Saving & Syncing..." : "Save All Client Details to Cloud"
 								})]
 							})
 						]
@@ -43468,581 +43750,634 @@ var ApplicationForm = ({ onSuccessLogin, onNavigate, onShowToast }) => {
 	});
 	const liveMonthlyEmi = calcMonthlyEmi(loanAmount, tenure, 11.9);
 	return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("section", {
-		className: "max-w-4xl mx-auto px-4 sm:px-6 py-12 sm:py-16",
-		children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-			className: "bg-white rounded-2xl border border-[rgba(8,27,51,0.12)] shadow-sm overflow-hidden",
-			children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-				className: "bg-[#081b33] text-white px-6 sm:px-8 py-6 space-y-4",
-				children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-					className: "flex flex-wrap items-center justify-between gap-2",
-					children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
-						className: "text-xs uppercase tracking-[0.18em] text-[#c5a059]",
-						children: "Kuwait Credit Application"
-					}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("h1", {
-						className: "font-display text-2xl sm:text-3xl font-semibold text-white",
-						children: "Apply for KWD Liquidity Facility"
-					})] }), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("span", {
-						className: "text-xs font-mono text-slate-300 tabular-nums",
-						children: [
-							"Step ",
-							step,
-							" of 4"
-						]
-					})]
-				}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-					className: "grid grid-cols-4 gap-2",
-					children: [
-						1,
-						2,
-						3,
-						4
-					].map((s) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: `h-1.5 rounded-full transition-colors ${s <= step ? "bg-[#c5a059]" : "bg-white/15"}` }, s))
-				})]
-			}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-				className: "p-6 sm:p-8",
+		className: "max-w-5xl mx-auto px-4 sm:px-6 py-10 sm:py-14 space-y-6",
+		children: [
+			/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+				className: "relative rounded-2xl overflow-hidden bg-[#081b33] text-white border border-[rgba(8,27,51,0.15)]",
 				children: [
-					step === 1 && /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("form", {
-						onSubmit: handleStep1Next,
-						className: "space-y-6",
-						children: [
-							/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-								className: "space-y-1",
-								children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("h2", {
-									className: "font-display text-2xl font-semibold text-[#081b33]",
-									children: "1. Applicant Identity & Portal Email"
-								}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
-									className: "text-sm text-[#526071]",
-									children: "Enter your legal name matching your Kuwait Civil ID and your primary email address."
-								})]
-							}),
-							/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-								className: "grid grid-cols-1 sm:grid-cols-2 gap-5",
-								children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("label", {
-									className: "block text-xs font-semibold uppercase tracking-wider text-[#526071] mb-1.5",
-									children: "Full Legal Name"
-								}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("input", {
-									type: "text",
-									required: true,
-									value: fullName,
-									onChange: (e) => setFullName(e.target.value),
-									placeholder: "e.g. Abdullah Al-Sabah",
-									className: "w-full px-3.5 py-2.5 rounded-md border border-[rgba(8,27,51,0.18)] text-sm text-[#081b33]"
-								})] }), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("label", {
-									className: "block text-xs font-semibold uppercase tracking-wider text-[#526071] mb-1.5",
-									children: "Email Address"
-								}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("input", {
-									type: "email",
-									required: true,
-									value: email,
-									onChange: (e) => setEmail(e.target.value),
-									placeholder: "name@example.com",
-									className: "w-full px-3.5 py-2.5 rounded-md border border-[rgba(8,27,51,0.18)] text-sm text-[#081b33]"
-								})] })]
-							}),
-							/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-								className: "flex items-center justify-between pt-4 border-t border-[rgba(8,27,51,0.08)]",
-								children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("button", {
-									type: "button",
-									onClick: () => onNavigate("login"),
-									className: "text-sm font-medium text-[#526071] hover:text-[#081b33]",
-									children: "Already applied? Client Login"
-								}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("button", {
-									type: "submit",
-									disabled: checkingEmail,
-									className: "inline-flex items-center gap-2 px-6 py-2.5 rounded-md bg-[#081b33] hover:bg-[#102a4a] text-white text-sm font-medium disabled:opacity-60",
-									children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: checkingEmail ? "Checking..." : "Continue" }), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(ArrowRight, { className: "w-4 h-4" })]
-								})]
-							})
-						]
+					/* @__PURE__ */ (0, import_jsx_runtime.jsx)("img", {
+						src: "./arzan-kuwait-commercial.jpg",
+						alt: "Kuwait Financial Center",
+						referrerPolicy: "no-referrer",
+						className: "absolute inset-0 w-full h-full object-cover opacity-35"
 					}),
-					step === 2 && /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("form", {
-						onSubmit: handleStep2Next,
-						className: "space-y-6",
+					/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "absolute inset-0 bg-gradient-to-r from-[#081b33] via-[#081b33]/90 to-[#081b33]/55" }),
+					/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+						className: "relative p-6 sm:p-8 flex flex-col md:flex-row md:items-center justify-between gap-6",
+						children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+							className: "space-y-2 max-w-xl",
+							children: [
+								/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+									className: "flex flex-wrap items-center gap-3",
+									children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
+										className: "text-xs font-semibold uppercase tracking-[0.18em] text-[#c5a059]",
+										children: "Kuwait Credit Application"
+									}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+										className: "font-ar text-xs font-semibold text-[#c5a059]",
+										dir: "rtl",
+										children: "طلب تمويل سيولة بالدينار الكويتي"
+									})]
+								}),
+								/* @__PURE__ */ (0, import_jsx_runtime.jsx)("h1", {
+									className: "font-display text-3xl sm:text-4xl font-semibold text-white",
+									children: "Apply for KWD Liquidity Facility"
+								}),
+								/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
+									className: "font-ar text-sm text-slate-200",
+									dir: "rtl",
+									children: "تقديم طلب تمويل شخصي أو تجاري عبر التحقق من البطاقة المدنية والآيبان الكويتي"
+								})
+							]
+						}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+							className: "w-full md:w-52 h-28 rounded-xl overflow-hidden border border-white/20 shrink-0 shadow-md",
+							children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("img", {
+								src: "./arzan-kuwait-wealth.jpg",
+								alt: "Arzan Kuwait Advisory",
+								referrerPolicy: "no-referrer",
+								className: "w-full h-full object-cover"
+							})
+						})]
+					})
+				]
+			}),
+			/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+				className: "bg-white rounded-2xl border border-[rgba(8,27,51,0.12)] shadow-sm overflow-hidden",
+				children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+					className: "bg-[#081b33] text-white px-6 sm:px-8 py-5 space-y-3",
+					children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+						className: "flex flex-wrap items-center justify-between gap-2 text-xs",
+						children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("span", {
+							className: "font-mono text-slate-300 tabular-nums",
+							children: [
+								"Step ",
+								step,
+								" of 4"
+							]
+						}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("span", {
+							className: "font-ar text-[#c5a059]",
+							dir: "rtl",
+							children: [
+								"الخطوة ",
+								step,
+								" من 4 · أرزان لإدارة الاستثمار"
+							]
+						})]
+					}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+						className: "grid grid-cols-4 gap-2",
 						children: [
-							/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-								className: "space-y-1",
-								children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("h2", {
-									className: "font-display text-2xl font-semibold text-[#081b33]",
-									children: "2. Kuwait Residency, Income & Bank IBAN"
-								}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
-									className: "text-sm text-[#526071]",
-									children: "Ensure your bank account number and Kuwait IBAN match your personal bank statement accurately."
-								})]
-							}),
-							/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-								className: "grid grid-cols-1 sm:grid-cols-2 gap-5",
-								children: [
-									/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("label", {
+							1,
+							2,
+							3,
+							4
+						].map((s) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: `h-1.5 rounded-full transition-colors ${s <= step ? "bg-[#c5a059]" : "bg-white/15"}` }, s))
+					})]
+				}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+					className: "p-6 sm:p-8",
+					children: [
+						step === 1 && /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("form", {
+							onSubmit: handleStep1Next,
+							className: "space-y-6",
+							children: [
+								/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+									className: "space-y-1",
+									children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("h2", {
+										className: "font-display text-2xl font-semibold text-[#081b33]",
+										children: "1. Applicant Identity & Portal Email"
+									}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
+										className: "text-sm text-[#526071]",
+										children: "Enter your legal name matching your Kuwait Civil ID and your primary email address."
+									})]
+								}),
+								/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+									className: "grid grid-cols-1 sm:grid-cols-2 gap-5",
+									children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("label", {
 										className: "block text-xs font-semibold uppercase tracking-wider text-[#526071] mb-1.5",
-										children: "Kuwait Mobile Number"
-									}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("input", {
-										type: "tel",
-										required: true,
-										value: phone,
-										onChange: (e) => setPhone(e.target.value),
-										placeholder: "+965 5555 0000",
-										className: "w-full px-3.5 py-2.5 rounded-md border border-[rgba(8,27,51,0.18)] text-sm text-[#081b33]"
-									})] }),
-									/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("label", {
-										className: "block text-xs font-semibold uppercase tracking-wider text-[#526071] mb-1.5",
-										children: "Date of Birth"
-									}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("input", {
-										type: "date",
-										required: true,
-										value: dob,
-										onChange: (e) => setDob(e.target.value),
-										className: "w-full px-3.5 py-2.5 rounded-md border border-[rgba(8,27,51,0.18)] text-sm text-[#081b33]"
-									})] }),
-									/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("label", {
-										className: "block text-xs font-semibold uppercase tracking-wider text-[#526071] mb-1.5",
-										children: "12-Digit Kuwait Civil ID"
+										children: "Full Legal Name"
 									}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("input", {
 										type: "text",
 										required: true,
-										maxLength: 12,
-										value: aadhaar,
-										onChange: (e) => setAadhaar(e.target.value.replace(/\D/g, "")),
-										placeholder: "290010112345",
-										className: "w-full px-3.5 py-2.5 rounded-md border border-[rgba(8,27,51,0.18)] text-sm font-mono text-[#081b33]"
-									})] }),
-									/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("label", {
+										value: fullName,
+										onChange: (e) => setFullName(e.target.value),
+										placeholder: "e.g. Abdullah Al-Sabah",
+										className: "w-full px-3.5 py-2.5 rounded-md border border-[rgba(8,27,51,0.18)] text-sm text-[#081b33]"
+									})] }), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("label", {
 										className: "block text-xs font-semibold uppercase tracking-wider text-[#526071] mb-1.5",
-										children: "Governorate"
-									}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("select", {
-										value: governorate,
-										onChange: (e) => setGovernorate(e.target.value),
-										className: "w-full px-3.5 py-2.5 rounded-md border border-[rgba(8,27,51,0.18)] text-sm text-[#081b33] bg-white",
-										children: GOVERNORATES.map((g) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)("option", {
-											value: g,
-											children: g
-										}, g))
-									})] }),
-									/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-										className: "sm:col-span-2",
-										children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("label", {
+										children: "Email Address"
+									}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("input", {
+										type: "email",
+										required: true,
+										value: email,
+										onChange: (e) => setEmail(e.target.value),
+										placeholder: "name@example.com",
+										className: "w-full px-3.5 py-2.5 rounded-md border border-[rgba(8,27,51,0.18)] text-sm text-[#081b33]"
+									})] })]
+								}),
+								/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+									className: "flex items-center justify-between pt-4 border-t border-[rgba(8,27,51,0.08)]",
+									children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("button", {
+										type: "button",
+										onClick: () => onNavigate("login"),
+										className: "text-sm font-medium text-[#526071] hover:text-[#081b33]",
+										children: "Already applied? Client Login"
+									}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("button", {
+										type: "submit",
+										disabled: checkingEmail,
+										className: "inline-flex items-center gap-2 px-6 py-2.5 rounded-md bg-[#081b33] hover:bg-[#102a4a] text-white text-sm font-medium disabled:opacity-60",
+										children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: checkingEmail ? "Checking..." : "Continue" }), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(ArrowRight, { className: "w-4 h-4" })]
+									})]
+								})
+							]
+						}),
+						step === 2 && /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("form", {
+							onSubmit: handleStep2Next,
+							className: "space-y-6",
+							children: [
+								/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+									className: "space-y-1",
+									children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("h2", {
+										className: "font-display text-2xl font-semibold text-[#081b33]",
+										children: "2. Kuwait Residency, Income & Bank IBAN"
+									}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
+										className: "text-sm text-[#526071]",
+										children: "Ensure your bank account number and Kuwait IBAN match your personal bank statement accurately."
+									})]
+								}),
+								/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+									className: "grid grid-cols-1 sm:grid-cols-2 gap-5",
+									children: [
+										/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("label", {
 											className: "block text-xs font-semibold uppercase tracking-wider text-[#526071] mb-1.5",
-											children: "Residential Address (Area, Block, Street)"
+											children: "Kuwait Mobile Number"
+										}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("input", {
+											type: "tel",
+											required: true,
+											value: phone,
+											onChange: (e) => setPhone(e.target.value),
+											placeholder: "+965 5555 0000",
+											className: "w-full px-3.5 py-2.5 rounded-md border border-[rgba(8,27,51,0.18)] text-sm text-[#081b33]"
+										})] }),
+										/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("label", {
+											className: "block text-xs font-semibold uppercase tracking-wider text-[#526071] mb-1.5",
+											children: "Date of Birth"
+										}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("input", {
+											type: "date",
+											required: true,
+											value: dob,
+											onChange: (e) => setDob(e.target.value),
+											className: "w-full px-3.5 py-2.5 rounded-md border border-[rgba(8,27,51,0.18)] text-sm text-[#081b33]"
+										})] }),
+										/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("label", {
+											className: "block text-xs font-semibold uppercase tracking-wider text-[#526071] mb-1.5",
+											children: "12-Digit Kuwait Civil ID"
 										}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("input", {
 											type: "text",
 											required: true,
-											value: address,
-											onChange: (e) => setAddress(e.target.value),
-											placeholder: "Salmiya, Block 4, Street 12",
-											className: "w-full px-3.5 py-2.5 rounded-md border border-[rgba(8,27,51,0.18)] text-sm text-[#081b33]"
-										})]
-									}),
-									/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("label", {
-										className: "block text-xs font-semibold uppercase tracking-wider text-[#526071] mb-1.5",
-										children: "Employment Type"
-									}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("select", {
-										value: employmentStatus,
-										onChange: (e) => setEmploymentStatus(e.target.value),
-										className: "w-full px-3.5 py-2.5 rounded-md border border-[rgba(8,27,51,0.18)] text-sm text-[#081b33] bg-white",
+											maxLength: 12,
+											value: aadhaar,
+											onChange: (e) => setAadhaar(e.target.value.replace(/\D/g, "")),
+											placeholder: "290010112345",
+											className: "w-full px-3.5 py-2.5 rounded-md border border-[rgba(8,27,51,0.18)] text-sm font-mono text-[#081b33]"
+										})] }),
+										/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("label", {
+											className: "block text-xs font-semibold uppercase tracking-wider text-[#526071] mb-1.5",
+											children: "Governorate"
+										}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("select", {
+											value: governorate,
+											onChange: (e) => setGovernorate(e.target.value),
+											className: "w-full px-3.5 py-2.5 rounded-md border border-[rgba(8,27,51,0.18)] text-sm text-[#081b33] bg-white",
+											children: GOVERNORATES.map((g) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)("option", {
+												value: g,
+												children: g
+											}, g))
+										})] }),
+										/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+											className: "sm:col-span-2",
+											children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("label", {
+												className: "block text-xs font-semibold uppercase tracking-wider text-[#526071] mb-1.5",
+												children: "Residential Address (Area, Block, Street)"
+											}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("input", {
+												type: "text",
+												required: true,
+												value: address,
+												onChange: (e) => setAddress(e.target.value),
+												placeholder: "Salmiya, Block 4, Street 12",
+												className: "w-full px-3.5 py-2.5 rounded-md border border-[rgba(8,27,51,0.18)] text-sm text-[#081b33]"
+											})]
+										}),
+										/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("label", {
+											className: "block text-xs font-semibold uppercase tracking-wider text-[#526071] mb-1.5",
+											children: "Employment Type"
+										}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("select", {
+											value: employmentStatus,
+											onChange: (e) => setEmploymentStatus(e.target.value),
+											className: "w-full px-3.5 py-2.5 rounded-md border border-[rgba(8,27,51,0.18)] text-sm text-[#081b33] bg-white",
+											children: [
+												/* @__PURE__ */ (0, import_jsx_runtime.jsx)("option", {
+													value: "Salaried Government",
+													children: "Salaried Government"
+												}),
+												/* @__PURE__ */ (0, import_jsx_runtime.jsx)("option", {
+													value: "Salaried Private",
+													children: "Salaried Private"
+												}),
+												/* @__PURE__ */ (0, import_jsx_runtime.jsx)("option", {
+													value: "Self-Employed / Business",
+													children: "Self-Employed / Business"
+												})
+											]
+										})] }),
+										/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("label", {
+											className: "block text-xs font-semibold uppercase tracking-wider text-[#526071] mb-1.5",
+											children: "Monthly Income (KWD)"
+										}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("input", {
+											type: "number",
+											min: 250,
+											required: true,
+											value: monthlyIncome,
+											onChange: (e) => setMonthlyIncome(Number(e.target.value)),
+											className: "w-full px-3.5 py-2.5 rounded-md border border-[rgba(8,27,51,0.18)] text-sm text-[#081b33] tabular-nums"
+										})] })
+									]
+								}),
+								/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+									className: "bg-[#f7f8fa] rounded-xl border border-[rgba(8,27,51,0.1)] p-5 space-y-4",
+									children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+										className: "grid grid-cols-1 sm:grid-cols-2 gap-5",
+										children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+											className: "flex justify-between text-xs font-semibold text-[#526071] mb-1",
+											children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: "Requested Facility" }), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+												className: "text-[#081b33] tabular-nums",
+												children: formatKWD(loanAmount)
+											})]
+										}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("input", {
+											type: "range",
+											min: 1e3,
+											max: 25e3,
+											step: 500,
+											value: loanAmount,
+											onChange: (e) => setLoanAmount(Number(e.target.value)),
+											className: "w-full accent-[#081b33]"
+										})] }), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+											className: "flex justify-between text-xs font-semibold text-[#526071] mb-1",
+											children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: "Tenure" }), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("span", {
+												className: "text-[#081b33] tabular-nums",
+												children: [tenure, " Months"]
+											})]
+										}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("input", {
+											type: "range",
+											min: 9,
+											max: 48,
+											step: 3,
+											value: tenure,
+											onChange: (e) => setTenure(Number(e.target.value)),
+											className: "w-full accent-[#081b33]"
+										})] })]
+									}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("p", {
+										className: "text-xs text-[#526071]",
 										children: [
-											/* @__PURE__ */ (0, import_jsx_runtime.jsx)("option", {
-												value: "Salaried Government",
-												children: "Salaried Government"
-											}),
-											/* @__PURE__ */ (0, import_jsx_runtime.jsx)("option", {
-												value: "Salaried Private",
-												children: "Salaried Private"
-											}),
-											/* @__PURE__ */ (0, import_jsx_runtime.jsx)("option", {
-												value: "Self-Employed / Business",
-												children: "Self-Employed / Business"
+											"Estimated Monthly EMI (11.9% p.a.):",
+											" ",
+											/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("strong", {
+												className: "text-[#081b33] tabular-nums",
+												children: [formatKWD(liveMonthlyEmi), " / month"]
 											})
 										]
-									})] }),
-									/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("label", {
-										className: "block text-xs font-semibold uppercase tracking-wider text-[#526071] mb-1.5",
-										children: "Monthly Income (KWD)"
-									}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("input", {
-										type: "number",
-										min: 250,
-										required: true,
-										value: monthlyIncome,
-										onChange: (e) => setMonthlyIncome(Number(e.target.value)),
-										className: "w-full px-3.5 py-2.5 rounded-md border border-[rgba(8,27,51,0.18)] text-sm text-[#081b33] tabular-nums"
-									})] })
-								]
-							}),
-							/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-								className: "bg-[#f7f8fa] rounded-xl border border-[rgba(8,27,51,0.1)] p-5 space-y-4",
-								children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-									className: "grid grid-cols-1 sm:grid-cols-2 gap-5",
-									children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-										className: "flex justify-between text-xs font-semibold text-[#526071] mb-1",
-										children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: "Requested Facility" }), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-											className: "text-[#081b33] tabular-nums",
-											children: formatKWD(loanAmount)
-										})]
-									}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("input", {
-										type: "range",
-										min: 1e3,
-										max: 25e3,
-										step: 500,
-										value: loanAmount,
-										onChange: (e) => setLoanAmount(Number(e.target.value)),
-										className: "w-full accent-[#081b33]"
-									})] }), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-										className: "flex justify-between text-xs font-semibold text-[#526071] mb-1",
-										children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: "Tenure" }), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("span", {
-											className: "text-[#081b33] tabular-nums",
-											children: [tenure, " Months"]
-										})]
-									}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("input", {
-										type: "range",
-										min: 9,
-										max: 48,
-										step: 3,
-										value: tenure,
-										onChange: (e) => setTenure(Number(e.target.value)),
-										className: "w-full accent-[#081b33]"
-									})] })]
-								}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("p", {
-									className: "text-xs text-[#526071]",
+									})]
+								}),
+								/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+									className: "grid grid-cols-1 sm:grid-cols-3 gap-4",
 									children: [
-										"Estimated Monthly EMI (11.9% p.a.):",
-										" ",
-										/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("strong", {
-											className: "text-[#081b33] tabular-nums",
-											children: [formatKWD(liveMonthlyEmi), " / month"]
+										/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("label", {
+											className: "block text-xs font-semibold uppercase tracking-wider text-[#526071] mb-1.5",
+											children: "Kuwait Bank"
+										}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("select", {
+											value: bankName,
+											onChange: (e) => setBankName(e.target.value),
+											className: "w-full px-3.5 py-2.5 rounded-md border border-[rgba(8,27,51,0.18)] text-sm text-[#081b33] bg-white",
+											children: KUWAIT_BANKS.map((b) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)("option", {
+												value: b,
+												children: b
+											}, b))
+										})] }),
+										/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("label", {
+											className: "block text-xs font-semibold uppercase tracking-wider text-[#526071] mb-1.5",
+											children: "Account Number"
+										}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("input", {
+											type: "text",
+											required: true,
+											value: bankAcc,
+											onChange: (e) => setBankAcc(e.target.value),
+											placeholder: "Account Number",
+											className: "w-full px-3.5 py-2.5 rounded-md border border-[rgba(8,27,51,0.18)] text-sm font-mono text-[#081b33]"
+										})] }),
+										/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("label", {
+											className: "block text-xs font-semibold uppercase tracking-wider text-[#526071] mb-1.5",
+											children: "Kuwait IBAN (KW...)"
+										}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("input", {
+											type: "text",
+											required: true,
+											value: bankIfsc,
+											onChange: (e) => setBankIfsc(e.target.value.toUpperCase()),
+											placeholder: "KW81CBKU0000...",
+											className: "w-full px-3.5 py-2.5 rounded-md border border-[rgba(8,27,51,0.18)] text-sm font-mono text-[#081b33]"
+										})] })
+									]
+								}),
+								/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+									className: "flex items-center justify-between pt-4 border-t border-[rgba(8,27,51,0.08)]",
+									children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("button", {
+										type: "button",
+										onClick: () => setStep(1),
+										className: "inline-flex items-center gap-1.5 px-4 py-2.5 rounded-md border border-[rgba(8,27,51,0.2)] text-sm font-medium text-[#081b33]",
+										children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(ArrowLeft, { className: "w-4 h-4" }), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: "Back" })]
+									}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("button", {
+										type: "submit",
+										className: "inline-flex items-center gap-2 px-6 py-2.5 rounded-md bg-[#081b33] hover:bg-[#102a4a] text-white text-sm font-medium",
+										children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: "Continue to KYC" }), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(ArrowRight, { className: "w-4 h-4" })]
+									})]
+								})
+							]
+						}),
+						step === 3 && /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("form", {
+							onSubmit: handleStep3Next,
+							className: "space-y-6",
+							children: [
+								/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+									className: "space-y-1",
+									children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("h2", {
+										className: "font-display text-2xl font-semibold text-[#081b33]",
+										children: "3. Civil ID Documents, Guarantor & Live Liveness"
+									}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
+										className: "text-sm text-[#526071]",
+										children: "Documents are stored securely for officer underwriting verification only."
+									})]
+								}),
+								/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+									className: "grid grid-cols-1 sm:grid-cols-3 gap-4",
+									children: [
+										/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("label", {
+											className: "border border-dashed border-[rgba(8,27,51,0.25)] rounded-xl p-4 flex flex-col items-center justify-center text-center gap-2 cursor-pointer hover:bg-[#f7f8fa]",
+											children: [
+												civilFront ? /* @__PURE__ */ (0, import_jsx_runtime.jsx)(FileCheck2, { className: "w-6 h-6 text-emerald-600" }) : /* @__PURE__ */ (0, import_jsx_runtime.jsx)(CloudUpload, { className: "w-6 h-6 text-[#a9833d]" }),
+												/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+													className: "text-xs font-semibold text-[#081b33]",
+													children: "Civil ID Front"
+												}),
+												/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+													className: "text-[11px] text-[#526071]",
+													children: civilFront ? "Uploaded" : "Select image"
+												}),
+												/* @__PURE__ */ (0, import_jsx_runtime.jsx)("input", {
+													type: "file",
+													accept: "image/*",
+													className: "hidden",
+													onChange: (e) => handleFileUpload(e, setCivilFront, "Civil ID Front")
+												})
+											]
+										}),
+										/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("label", {
+											className: "border border-dashed border-[rgba(8,27,51,0.25)] rounded-xl p-4 flex flex-col items-center justify-center text-center gap-2 cursor-pointer hover:bg-[#f7f8fa]",
+											children: [
+												civilBack ? /* @__PURE__ */ (0, import_jsx_runtime.jsx)(FileCheck2, { className: "w-6 h-6 text-emerald-600" }) : /* @__PURE__ */ (0, import_jsx_runtime.jsx)(CloudUpload, { className: "w-6 h-6 text-[#a9833d]" }),
+												/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+													className: "text-xs font-semibold text-[#081b33]",
+													children: "Civil ID Back"
+												}),
+												/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+													className: "text-[11px] text-[#526071]",
+													children: civilBack ? "Uploaded" : "Select image"
+												}),
+												/* @__PURE__ */ (0, import_jsx_runtime.jsx)("input", {
+													type: "file",
+													accept: "image/*",
+													className: "hidden",
+													onChange: (e) => handleFileUpload(e, setCivilBack, "Civil ID Back")
+												})
+											]
+										}),
+										/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("label", {
+											className: "border border-dashed border-[rgba(8,27,51,0.25)] rounded-xl p-4 flex flex-col items-center justify-center text-center gap-2 cursor-pointer hover:bg-[#f7f8fa]",
+											children: [
+												guarantorFront ? /* @__PURE__ */ (0, import_jsx_runtime.jsx)(FileCheck2, { className: "w-6 h-6 text-emerald-600" }) : /* @__PURE__ */ (0, import_jsx_runtime.jsx)(CloudUpload, { className: "w-6 h-6 text-[#a9833d]" }),
+												/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+													className: "text-xs font-semibold text-[#081b33]",
+													children: "Guarantor Civil ID"
+												}),
+												/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+													className: "text-[11px] text-[#526071]",
+													children: guarantorFront ? "Uploaded" : "Select image"
+												}),
+												/* @__PURE__ */ (0, import_jsx_runtime.jsx)("input", {
+													type: "file",
+													accept: "image/*",
+													className: "hidden",
+													onChange: (e) => handleFileUpload(e, setGuarantorFront, "Guarantor Civil ID")
+												})
+											]
 										})
 									]
-								})]
-							}),
-							/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-								className: "grid grid-cols-1 sm:grid-cols-3 gap-4",
-								children: [
-									/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("label", {
+								}),
+								/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+									className: "grid grid-cols-1 sm:grid-cols-2 gap-4",
+									children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("label", {
 										className: "block text-xs font-semibold uppercase tracking-wider text-[#526071] mb-1.5",
-										children: "Kuwait Bank"
-									}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("select", {
-										value: bankName,
-										onChange: (e) => setBankName(e.target.value),
-										className: "w-full px-3.5 py-2.5 rounded-md border border-[rgba(8,27,51,0.18)] text-sm text-[#081b33] bg-white",
-										children: KUWAIT_BANKS.map((b) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)("option", {
-											value: b,
-											children: b
-										}, b))
-									})] }),
-									/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("label", {
-										className: "block text-xs font-semibold uppercase tracking-wider text-[#526071] mb-1.5",
-										children: "Account Number"
+										children: "Guarantor Full Name"
 									}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("input", {
 										type: "text",
 										required: true,
-										value: bankAcc,
-										onChange: (e) => setBankAcc(e.target.value),
-										placeholder: "Account Number",
-										className: "w-full px-3.5 py-2.5 rounded-md border border-[rgba(8,27,51,0.18)] text-sm font-mono text-[#081b33]"
-									})] }),
-									/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("label", {
+										value: nomineeName,
+										onChange: (e) => setNomineeName(e.target.value),
+										placeholder: "Guarantor / Reference Name",
+										className: "w-full px-3.5 py-2.5 rounded-md border border-[rgba(8,27,51,0.18)] text-sm text-[#081b33]"
+									})] }), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("label", {
 										className: "block text-xs font-semibold uppercase tracking-wider text-[#526071] mb-1.5",
-										children: "Kuwait IBAN (KW...)"
+										children: "Guarantor Kuwait Mobile"
 									}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("input", {
-										type: "text",
+										type: "tel",
 										required: true,
-										value: bankIfsc,
-										onChange: (e) => setBankIfsc(e.target.value.toUpperCase()),
-										placeholder: "KW81CBKU0000...",
-										className: "w-full px-3.5 py-2.5 rounded-md border border-[rgba(8,27,51,0.18)] text-sm font-mono text-[#081b33]"
-									})] })
-								]
-							}),
-							/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-								className: "flex items-center justify-between pt-4 border-t border-[rgba(8,27,51,0.08)]",
-								children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("button", {
-									type: "button",
-									onClick: () => setStep(1),
-									className: "inline-flex items-center gap-1.5 px-4 py-2.5 rounded-md border border-[rgba(8,27,51,0.2)] text-sm font-medium text-[#081b33]",
-									children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(ArrowLeft, { className: "w-4 h-4" }), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: "Back" })]
-								}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("button", {
-									type: "submit",
-									className: "inline-flex items-center gap-2 px-6 py-2.5 rounded-md bg-[#081b33] hover:bg-[#102a4a] text-white text-sm font-medium",
-									children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: "Continue to KYC" }), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(ArrowRight, { className: "w-4 h-4" })]
-								})]
-							})
-						]
-					}),
-					step === 3 && /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("form", {
-						onSubmit: handleStep3Next,
-						className: "space-y-6",
-						children: [
-							/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-								className: "space-y-1",
-								children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("h2", {
-									className: "font-display text-2xl font-semibold text-[#081b33]",
-									children: "3. Civil ID Documents, Guarantor & Live Liveness"
-								}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
-									className: "text-sm text-[#526071]",
-									children: "Documents are stored securely for officer underwriting verification only."
-								})]
-							}),
-							/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-								className: "grid grid-cols-1 sm:grid-cols-3 gap-4",
-								children: [
-									/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("label", {
-										className: "border border-dashed border-[rgba(8,27,51,0.25)] rounded-xl p-4 flex flex-col items-center justify-center text-center gap-2 cursor-pointer hover:bg-[#f7f8fa]",
-										children: [
-											civilFront ? /* @__PURE__ */ (0, import_jsx_runtime.jsx)(FileCheck2, { className: "w-6 h-6 text-emerald-600" }) : /* @__PURE__ */ (0, import_jsx_runtime.jsx)(CloudUpload, { className: "w-6 h-6 text-[#a9833d]" }),
-											/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-												className: "text-xs font-semibold text-[#081b33]",
-												children: "Civil ID Front"
-											}),
-											/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-												className: "text-[11px] text-[#526071]",
-												children: civilFront ? "Uploaded" : "Select image"
-											}),
-											/* @__PURE__ */ (0, import_jsx_runtime.jsx)("input", {
-												type: "file",
-												accept: "image/*",
-												className: "hidden",
-												onChange: (e) => handleFileUpload(e, setCivilFront, "Civil ID Front")
-											})
-										]
-									}),
-									/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("label", {
-										className: "border border-dashed border-[rgba(8,27,51,0.25)] rounded-xl p-4 flex flex-col items-center justify-center text-center gap-2 cursor-pointer hover:bg-[#f7f8fa]",
-										children: [
-											civilBack ? /* @__PURE__ */ (0, import_jsx_runtime.jsx)(FileCheck2, { className: "w-6 h-6 text-emerald-600" }) : /* @__PURE__ */ (0, import_jsx_runtime.jsx)(CloudUpload, { className: "w-6 h-6 text-[#a9833d]" }),
-											/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-												className: "text-xs font-semibold text-[#081b33]",
-												children: "Civil ID Back"
-											}),
-											/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-												className: "text-[11px] text-[#526071]",
-												children: civilBack ? "Uploaded" : "Select image"
-											}),
-											/* @__PURE__ */ (0, import_jsx_runtime.jsx)("input", {
-												type: "file",
-												accept: "image/*",
-												className: "hidden",
-												onChange: (e) => handleFileUpload(e, setCivilBack, "Civil ID Back")
-											})
-										]
-									}),
-									/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("label", {
-										className: "border border-dashed border-[rgba(8,27,51,0.25)] rounded-xl p-4 flex flex-col items-center justify-center text-center gap-2 cursor-pointer hover:bg-[#f7f8fa]",
-										children: [
-											guarantorFront ? /* @__PURE__ */ (0, import_jsx_runtime.jsx)(FileCheck2, { className: "w-6 h-6 text-emerald-600" }) : /* @__PURE__ */ (0, import_jsx_runtime.jsx)(CloudUpload, { className: "w-6 h-6 text-[#a9833d]" }),
-											/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-												className: "text-xs font-semibold text-[#081b33]",
-												children: "Guarantor Civil ID"
-											}),
-											/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-												className: "text-[11px] text-[#526071]",
-												children: guarantorFront ? "Uploaded" : "Select image"
-											}),
-											/* @__PURE__ */ (0, import_jsx_runtime.jsx)("input", {
-												type: "file",
-												accept: "image/*",
-												className: "hidden",
-												onChange: (e) => handleFileUpload(e, setGuarantorFront, "Guarantor Civil ID")
-											})
-										]
-									})
-								]
-							}),
-							/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-								className: "grid grid-cols-1 sm:grid-cols-2 gap-4",
-								children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("label", {
-									className: "block text-xs font-semibold uppercase tracking-wider text-[#526071] mb-1.5",
-									children: "Guarantor Full Name"
-								}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("input", {
-									type: "text",
-									required: true,
-									value: nomineeName,
-									onChange: (e) => setNomineeName(e.target.value),
-									placeholder: "Guarantor / Reference Name",
-									className: "w-full px-3.5 py-2.5 rounded-md border border-[rgba(8,27,51,0.18)] text-sm text-[#081b33]"
-								})] }), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("label", {
-									className: "block text-xs font-semibold uppercase tracking-wider text-[#526071] mb-1.5",
-									children: "Guarantor Kuwait Mobile"
-								}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("input", {
-									type: "tel",
-									required: true,
-									value: nomineePhone,
-									onChange: (e) => setNomineePhone(e.target.value),
-									placeholder: "+965 5555 0000",
-									className: "w-full px-3.5 py-2.5 rounded-md border border-[rgba(8,27,51,0.18)] text-sm text-[#081b33]"
-								})] })]
-							}),
-							/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-								className: "bg-[#f7f8fa] rounded-xl border border-[rgba(8,27,51,0.12)] p-5 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4",
-								children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-									className: "flex items-start gap-3",
-									children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(ShieldCheck, { className: `w-6 h-6 shrink-0 mt-0.5 ${facePhoto ? "text-emerald-600" : "text-[#a9833d]"}` }), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
-										className: "text-sm font-semibold text-[#081b33]",
-										children: "Live Facial Biometric Verification"
-									}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
-										className: "text-xs text-[#526071]",
-										children: facePhoto ? "Biometric capture completed and attached for underwriting." : "Capture a live camera frame to confirm applicant presence."
+										value: nomineePhone,
+										onChange: (e) => setNomineePhone(e.target.value),
+										placeholder: "+965 5555 0000",
+										className: "w-full px-3.5 py-2.5 rounded-md border border-[rgba(8,27,51,0.18)] text-sm text-[#081b33]"
 									})] })]
-								}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("button", {
-									type: "button",
-									onClick: openLivenessModal,
-									className: "inline-flex items-center gap-2 px-4 py-2.5 rounded-md bg-[#081b33] hover:bg-[#102a4a] text-white text-xs font-medium shrink-0",
-									children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Camera, { className: "w-4 h-4" }), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: facePhoto ? "Retake Live Face" : "Start Face Check" })]
-								})]
-							}),
-							/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-								className: "flex items-center justify-between pt-4 border-t border-[rgba(8,27,51,0.08)]",
-								children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("button", {
-									type: "button",
-									onClick: () => setStep(2),
-									className: "inline-flex items-center gap-1.5 px-4 py-2.5 rounded-md border border-[rgba(8,27,51,0.2)] text-sm font-medium text-[#081b33]",
-									children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(ArrowLeft, { className: "w-4 h-4" }), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: "Back" })]
-								}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("button", {
-									type: "submit",
-									className: "inline-flex items-center gap-2 px-6 py-2.5 rounded-md bg-[#081b33] hover:bg-[#102a4a] text-white text-sm font-medium",
-									children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: "Continue to Password" }), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(ArrowRight, { className: "w-4 h-4" })]
-								})]
-							})
-						]
-					}),
-					step === 4 && /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("form", {
-						onSubmit: handleFinalSubmit,
-						className: "space-y-6",
-						children: [
-							/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-								className: "space-y-1",
-								children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("h2", {
-									className: "font-display text-2xl font-semibold text-[#081b33]",
-									children: "4. Create Client Portal Password"
-								}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
-									className: "text-sm text-[#526071]",
-									children: "You will use this password with your email or AIM Client ID to view clearing status and wallet balance."
-								})]
-							}),
-							/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-								className: "grid grid-cols-1 sm:grid-cols-2 gap-5",
-								children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("label", {
-									className: "block text-xs font-semibold uppercase tracking-wider text-[#526071] mb-1.5",
-									children: "Portal Password"
-								}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-									className: "relative",
-									children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("input", {
+								}),
+								/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+									className: "bg-[#f7f8fa] rounded-xl border border-[rgba(8,27,51,0.12)] p-5 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4",
+									children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+										className: "flex items-start gap-3",
+										children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(ShieldCheck, { className: `w-6 h-6 shrink-0 mt-0.5 ${facePhoto ? "text-emerald-600" : "text-[#a9833d]"}` }), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
+											className: "text-sm font-semibold text-[#081b33]",
+											children: "Live Facial Biometric Verification"
+										}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
+											className: "text-xs text-[#526071]",
+											children: facePhoto ? "Biometric capture completed and attached for underwriting." : "Capture a live camera frame to confirm applicant presence."
+										})] })]
+									}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("button", {
+										type: "button",
+										onClick: openLivenessModal,
+										className: "inline-flex items-center gap-2 px-4 py-2.5 rounded-md bg-[#081b33] hover:bg-[#102a4a] text-white text-xs font-medium shrink-0",
+										children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Camera, { className: "w-4 h-4" }), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: facePhoto ? "Retake Live Face" : "Start Face Check" })]
+									})]
+								}),
+								/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+									className: "flex items-center justify-between pt-4 border-t border-[rgba(8,27,51,0.08)]",
+									children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("button", {
+										type: "button",
+										onClick: () => setStep(2),
+										className: "inline-flex items-center gap-1.5 px-4 py-2.5 rounded-md border border-[rgba(8,27,51,0.2)] text-sm font-medium text-[#081b33]",
+										children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(ArrowLeft, { className: "w-4 h-4" }), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: "Back" })]
+									}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("button", {
+										type: "submit",
+										className: "inline-flex items-center gap-2 px-6 py-2.5 rounded-md bg-[#081b33] hover:bg-[#102a4a] text-white text-sm font-medium",
+										children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: "Continue to Password" }), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(ArrowRight, { className: "w-4 h-4" })]
+									})]
+								})
+							]
+						}),
+						step === 4 && /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("form", {
+							onSubmit: handleFinalSubmit,
+							className: "space-y-6",
+							children: [
+								/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+									className: "space-y-1",
+									children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("h2", {
+										className: "font-display text-2xl font-semibold text-[#081b33]",
+										children: "4. Create Client Portal Password"
+									}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
+										className: "text-sm text-[#526071]",
+										children: "You will use this password with your email or AIM Client ID to view clearing status and wallet balance."
+									})]
+								}),
+								/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+									className: "grid grid-cols-1 sm:grid-cols-2 gap-5",
+									children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("label", {
+										className: "block text-xs font-semibold uppercase tracking-wider text-[#526071] mb-1.5",
+										children: "Portal Password"
+									}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+										className: "relative",
+										children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("input", {
+											type: showPass ? "text" : "password",
+											required: true,
+											minLength: 6,
+											value: password,
+											onChange: (e) => setPassword(e.target.value),
+											placeholder: "Minimum 6 characters",
+											className: "w-full px-3.5 py-2.5 pr-10 rounded-md border border-[rgba(8,27,51,0.18)] text-sm text-[#081b33]"
+										}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("button", {
+											type: "button",
+											onClick: () => setShowPass(!showPass),
+											className: "absolute right-3 top-2.5 text-[#526071]",
+											"aria-label": "Toggle password visibility",
+											children: showPass ? /* @__PURE__ */ (0, import_jsx_runtime.jsx)(EyeOff, { className: "w-4 h-4" }) : /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Eye, { className: "w-4 h-4" })
+										})]
+									})] }), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("label", {
+										className: "block text-xs font-semibold uppercase tracking-wider text-[#526071] mb-1.5",
+										children: "Confirm Password"
+									}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("input", {
 										type: showPass ? "text" : "password",
 										required: true,
 										minLength: 6,
-										value: password,
-										onChange: (e) => setPassword(e.target.value),
-										placeholder: "Minimum 6 characters",
-										className: "w-full px-3.5 py-2.5 pr-10 rounded-md border border-[rgba(8,27,51,0.18)] text-sm text-[#081b33]"
-									}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("button", {
+										value: confirmPassword,
+										onChange: (e) => setConfirmPassword(e.target.value),
+										placeholder: "Re-enter password",
+										className: "w-full px-3.5 py-2.5 rounded-md border border-[rgba(8,27,51,0.18)] text-sm text-[#081b33]"
+									})] })]
+								}),
+								/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+									className: "flex items-center justify-between pt-4 border-t border-[rgba(8,27,51,0.08)]",
+									children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("button", {
 										type: "button",
-										onClick: () => setShowPass(!showPass),
-										className: "absolute right-3 top-2.5 text-[#526071]",
-										"aria-label": "Toggle password visibility",
-										children: showPass ? /* @__PURE__ */ (0, import_jsx_runtime.jsx)(EyeOff, { className: "w-4 h-4" }) : /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Eye, { className: "w-4 h-4" })
+										onClick: () => setStep(3),
+										className: "inline-flex items-center gap-1.5 px-4 py-2.5 rounded-md border border-[rgba(8,27,51,0.2)] text-sm font-medium text-[#081b33]",
+										children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(ArrowLeft, { className: "w-4 h-4" }), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: "Back" })]
+									}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("button", {
+										type: "submit",
+										disabled: submitting,
+										className: "inline-flex items-center gap-2 px-6 py-3 rounded-md bg-[#a9833d] hover:bg-[#c5a059] text-white text-sm font-medium disabled:opacity-60",
+										children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: submitting ? "Submitting Dossier..." : "Submit Facility Application" }), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(CircleCheck, { className: "w-4 h-4" })]
 									})]
-								})] }), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("label", {
-									className: "block text-xs font-semibold uppercase tracking-wider text-[#526071] mb-1.5",
-									children: "Confirm Password"
-								}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("input", {
-									type: showPass ? "text" : "password",
-									required: true,
-									minLength: 6,
-									value: confirmPassword,
-									onChange: (e) => setConfirmPassword(e.target.value),
-									placeholder: "Re-enter password",
-									className: "w-full px-3.5 py-2.5 rounded-md border border-[rgba(8,27,51,0.18)] text-sm text-[#081b33]"
-								})] })]
-							}),
-							/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-								className: "flex items-center justify-between pt-4 border-t border-[rgba(8,27,51,0.08)]",
-								children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("button", {
-									type: "button",
-									onClick: () => setStep(3),
-									className: "inline-flex items-center gap-1.5 px-4 py-2.5 rounded-md border border-[rgba(8,27,51,0.2)] text-sm font-medium text-[#081b33]",
-									children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(ArrowLeft, { className: "w-4 h-4" }), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: "Back" })]
-								}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("button", {
-									type: "submit",
-									disabled: submitting,
-									className: "inline-flex items-center gap-2 px-6 py-3 rounded-md bg-[#a9833d] hover:bg-[#c5a059] text-white text-sm font-medium disabled:opacity-60",
-									children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: submitting ? "Submitting Dossier..." : "Submit Facility Application" }), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(CircleCheck, { className: "w-4 h-4" })]
-								})]
-							})
-						]
-					})
-				]
-			})]
-		}), camOpen && /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-			className: "fixed inset-0 z-50 bg-[#081b33]/75 backdrop-blur-sm flex items-center justify-center p-4",
-			children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-				className: "bg-white rounded-2xl max-w-md w-full overflow-hidden border border-[rgba(8,27,51,0.15)] shadow-2xl",
-				children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-					className: "px-5 py-4 border-b border-[rgba(8,27,51,0.1)] flex items-center justify-between",
-					children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("h3", {
-						className: "font-semibold text-[#081b33] text-sm",
-						children: "Live Facial Biometric Verification"
-					}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("button", {
-						type: "button",
-						onClick: () => {
-							stopCamera();
-							setCamOpen(false);
-						},
-						className: "text-[#526071] hover:text-[#081b33]",
-						children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(X$1, { className: "w-5 h-5" })
-					})]
-				}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-					className: "p-5 space-y-4",
-					children: [camStatus === "error" ? /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-						className: "bg-amber-50 border border-amber-200 rounded-xl p-4 space-y-3 text-center",
-						children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
-							className: "text-xs text-amber-900",
-							children: camError
-						}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("label", {
-							className: "inline-flex items-center gap-2 px-4 py-2 rounded-md bg-[#081b33] text-white text-xs font-medium cursor-pointer",
-							children: [
-								/* @__PURE__ */ (0, import_jsx_runtime.jsx)(CloudUpload, { className: "w-4 h-4" }),
-								/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: "Capture / Select Selfie Photo" }),
-								/* @__PURE__ */ (0, import_jsx_runtime.jsx)("input", {
-									type: "file",
-									accept: "image/*",
-									capture: "user",
-									className: "hidden",
-									onChange: handleFallbackSelfieUpload
 								})
 							]
-						})]
-					}) : /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-						className: "relative rounded-xl overflow-hidden bg-slate-900 aspect-[4/3]",
-						children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("video", {
-							ref: videoRef,
-							playsInline: true,
-							muted: true,
-							autoPlay: true,
-							className: "w-full h-full object-cover"
-						}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-							className: "absolute inset-0 pointer-events-none flex items-center justify-center",
-							children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-								className: "w-44 h-56 rounded-full border-2 border-[#c5a059]/80 relative overflow-hidden",
-								children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "liveness-scan-bar absolute left-0 right-0 h-0.5 bg-[#c5a059]" })
-							})
-						})]
-					}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-						className: "flex gap-3",
-						children: [camStatus !== "error" && /* @__PURE__ */ (0, import_jsx_runtime.jsx)("button", {
-							type: "button",
-							disabled: camStatus !== "ready",
-							onClick: captureLivenessFrame,
-							className: "flex-1 py-2.5 rounded-md bg-[#081b33] hover:bg-[#102a4a] text-white text-sm font-medium disabled:opacity-50",
-							children: camStatus === "starting" ? "Initializing Camera..." : camStatus === "capturing" ? "Verifying..." : "Capture & Verify"
+						})
+					]
+				})]
+			}),
+			camOpen && /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+				className: "fixed inset-0 z-50 bg-[#081b33]/75 backdrop-blur-sm flex items-center justify-center p-4",
+				children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+					className: "bg-white rounded-2xl max-w-md w-full overflow-hidden border border-[rgba(8,27,51,0.15)] shadow-2xl",
+					children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+						className: "px-5 py-4 border-b border-[rgba(8,27,51,0.1)] flex items-center justify-between",
+						children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("h3", {
+							className: "font-semibold text-[#081b33] text-sm",
+							children: "Live Facial Biometric Verification"
 						}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("button", {
 							type: "button",
 							onClick: () => {
 								stopCamera();
 								setCamOpen(false);
 							},
-							className: "px-4 py-2.5 rounded-md border border-[rgba(8,27,51,0.2)] text-sm text-[#081b33]",
-							children: "Cancel"
+							className: "text-[#526071] hover:text-[#081b33]",
+							children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(X$1, { className: "w-5 h-5" })
+						})]
+					}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+						className: "p-5 space-y-4",
+						children: [camStatus === "error" ? /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+							className: "bg-amber-50 border border-amber-200 rounded-xl p-4 space-y-3 text-center",
+							children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
+								className: "text-xs text-amber-900",
+								children: camError
+							}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("label", {
+								className: "inline-flex items-center gap-2 px-4 py-2 rounded-md bg-[#081b33] text-white text-xs font-medium cursor-pointer",
+								children: [
+									/* @__PURE__ */ (0, import_jsx_runtime.jsx)(CloudUpload, { className: "w-4 h-4" }),
+									/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: "Capture / Select Selfie Photo" }),
+									/* @__PURE__ */ (0, import_jsx_runtime.jsx)("input", {
+										type: "file",
+										accept: "image/*",
+										capture: "user",
+										className: "hidden",
+										onChange: handleFallbackSelfieUpload
+									})
+								]
+							})]
+						}) : /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+							className: "relative rounded-xl overflow-hidden bg-slate-900 aspect-[4/3]",
+							children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("video", {
+								ref: videoRef,
+								playsInline: true,
+								muted: true,
+								autoPlay: true,
+								className: "w-full h-full object-cover"
+							}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+								className: "absolute inset-0 pointer-events-none flex items-center justify-center",
+								children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+									className: "w-44 h-56 rounded-full border-2 border-[#c5a059]/80 relative overflow-hidden",
+									children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "liveness-scan-bar absolute left-0 right-0 h-0.5 bg-[#c5a059]" })
+								})
+							})]
+						}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+							className: "flex gap-3",
+							children: [camStatus !== "error" && /* @__PURE__ */ (0, import_jsx_runtime.jsx)("button", {
+								type: "button",
+								disabled: camStatus !== "ready",
+								onClick: captureLivenessFrame,
+								className: "flex-1 py-2.5 rounded-md bg-[#081b33] hover:bg-[#102a4a] text-white text-sm font-medium disabled:opacity-50",
+								children: camStatus === "starting" ? "Initializing Camera..." : camStatus === "capturing" ? "Verifying..." : "Capture & Verify"
+							}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("button", {
+								type: "button",
+								onClick: () => {
+									stopCamera();
+									setCamOpen(false);
+								},
+								className: "px-4 py-2.5 rounded-md border border-[rgba(8,27,51,0.2)] text-sm text-[#081b33]",
+								children: "Cancel"
+							})]
 						})]
 					})]
-				})]
+				})
 			})
-		})]
+		]
 	});
 };
 // src/components/ClientPortal.tsx
@@ -44197,33 +44532,54 @@ var ClientPortal = ({ mode, activeClient, onLoginSuccess, onClientUpdated, onLog
 		if (!await syncClientToCloud(updated)) queuePendingSync(updated);
 	};
 	if (mode === "login" || !activeClient) return /* @__PURE__ */ (0, import_jsx_runtime.jsx)("section", {
-		className: "max-w-5xl mx-auto px-4 sm:px-6 py-12 sm:py-16",
+		className: "max-w-5xl mx-auto px-4 sm:px-6 py-12 sm:py-16 space-y-6",
 		children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
 			className: "bg-white rounded-2xl border border-[rgba(8,27,51,0.12)] shadow-sm overflow-hidden grid grid-cols-1 lg:grid-cols-12",
 			children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-				className: "lg:col-span-5 relative bg-[#081b33] text-white min-h-[260px] flex flex-col justify-end p-8",
+				className: "lg:col-span-5 relative bg-[#081b33] text-white min-h-[300px] flex flex-col justify-between p-8",
 				children: [
 					/* @__PURE__ */ (0, import_jsx_runtime.jsx)("img", {
 						src: "./arzan-kuwait-lounge.jpg",
-						alt: "Arzan Private Client Lounge",
+						alt: "Arzan Private Client Lounge Kuwait",
 						referrerPolicy: "no-referrer",
-						className: "absolute inset-0 w-full h-full object-cover opacity-40"
+						className: "absolute inset-0 w-full h-full object-cover opacity-45"
 					}),
-					/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "absolute inset-0 bg-gradient-to-t from-[#081b33] via-[#081b33]/75 to-transparent" }),
+					/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "absolute inset-0 bg-gradient-to-t from-[#081b33] via-[#081b33]/75 to-[#081b33]/35" }),
 					/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-						className: "relative space-y-2",
+						className: "relative flex items-center justify-between gap-2",
+						children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
+							className: "text-[11px] font-semibold uppercase tracking-[0.18em] text-[#c5a059]",
+							children: "Kuwait Client Portal"
+						}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
+							className: "font-ar text-xs font-semibold text-[#c5a059]",
+							dir: "rtl",
+							children: "بوابة عملاء أرزان · الكويت"
+						})]
+					}),
+					/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+						className: "relative space-y-3",
 						children: [
-							/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
-								className: "text-xs font-semibold uppercase tracking-[0.18em] text-[#c5a059]",
-								children: "Kuwait Client Portal"
+							/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+								className: "w-20 h-14 rounded-lg overflow-hidden border border-white/25 shadow",
+								children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("img", {
+									src: "./arzan-kuwait-boardroom.jpg",
+									alt: "Kuwait Advisory Boardroom",
+									referrerPolicy: "no-referrer",
+									className: "w-full h-full object-cover"
+								})
 							}),
 							/* @__PURE__ */ (0, import_jsx_runtime.jsx)("h2", {
-								className: "font-display text-3xl font-semibold text-white",
+								className: "font-display text-3xl font-semibold text-white leading-tight",
 								children: "Access Your Facility & Clearing Wallet"
 							}),
 							/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
+								className: "font-ar text-sm text-[#c5a059]",
+								dir: "rtl",
+								children: "دخول العميل لمتابعة التمويل والمحفظة وجدول الأقساط الشهرية"
+							}),
+							/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
 								className: "text-xs text-slate-300 leading-relaxed",
-								children: "Sign in with your registered email address or AIM Client ID to view approval status, wallet balance, and monthly EMI calendar."
+								children: "Sign in with your registered email address or AIM Client ID to view approval status, clearing wallet balance, and monthly EMI calendar."
 							})
 						]
 					})
@@ -44232,13 +44588,27 @@ var ClientPortal = ({ mode, activeClient, onLoginSuccess, onClientUpdated, onLog
 				className: "lg:col-span-7 p-8 sm:p-10 space-y-6",
 				children: [
 					/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-						className: "space-y-1",
-						children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("h1", {
-							className: "font-display text-3xl font-semibold text-[#081b33]",
-							children: "Client Sign In"
-						}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
-							className: "text-sm text-[#526071]",
-							children: "Enter your portal credentials below."
+						className: "flex flex-wrap items-start justify-between gap-3",
+						children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+							className: "space-y-1",
+							children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("h1", {
+								className: "font-display text-3xl font-semibold text-[#081b33]",
+								children: "Client Sign In"
+							}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
+								className: "text-sm text-[#526071]",
+								children: "Enter your portal credentials below."
+							})]
+						}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+							className: "text-right",
+							children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
+								className: "font-ar text-lg font-bold text-[#081b33]",
+								dir: "rtl",
+								children: "تسجيل دخول العميل"
+							}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
+								className: "font-ar text-xs text-[#a9833d]",
+								dir: "rtl",
+								children: "أرزان لإدارة الاستثمار"
+							})]
 						})]
 					}),
 					loginError && /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
@@ -44249,9 +44619,16 @@ var ClientPortal = ({ mode, activeClient, onLoginSuccess, onClientUpdated, onLog
 						onSubmit: handleLoginSubmit,
 						className: "space-y-4",
 						children: [
-							/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("label", {
-								className: "block text-xs font-semibold uppercase tracking-wider text-[#526071] mb-1.5",
-								children: "Email or Client ID (AIM-XXXX)"
+							/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+								className: "flex items-center justify-between mb-1.5",
+								children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("label", {
+									className: "text-xs font-semibold uppercase tracking-wider text-[#526071]",
+									children: "Email or Client ID (AIM-XXXX)"
+								}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+									className: "font-ar text-xs text-[#526071]",
+									dir: "rtl",
+									children: "البريد الإلكتروني أو رقم العميل"
+								})]
 							}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("input", {
 								type: "text",
 								required: true,
@@ -44260,9 +44637,16 @@ var ClientPortal = ({ mode, activeClient, onLoginSuccess, onClientUpdated, onLog
 								placeholder: "name@example.com or AIM-1234",
 								className: "w-full px-3.5 py-2.5 rounded-md border border-[rgba(8,27,51,0.18)] text-sm text-[#081b33]"
 							})] }),
-							/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("label", {
-								className: "block text-xs font-semibold uppercase tracking-wider text-[#526071] mb-1.5",
-								children: "Portal Password"
+							/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+								className: "flex items-center justify-between mb-1.5",
+								children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("label", {
+									className: "text-xs font-semibold uppercase tracking-wider text-[#526071]",
+									children: "Portal Password"
+								}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+									className: "font-ar text-xs text-[#526071]",
+									dir: "rtl",
+									children: "كلمة المرور"
+								})]
 							}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
 								className: "relative",
 								children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("input", {
@@ -44280,21 +44664,25 @@ var ClientPortal = ({ mode, activeClient, onLoginSuccess, onClientUpdated, onLog
 									children: showPass ? /* @__PURE__ */ (0, import_jsx_runtime.jsx)(EyeOff, { className: "w-4 h-4" }) : /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Eye, { className: "w-4 h-4" })
 								})]
 							})] }),
-							/* @__PURE__ */ (0, import_jsx_runtime.jsx)("button", {
+							/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("button", {
 								type: "submit",
 								disabled: loggingIn,
-								className: "w-full py-3 rounded-md bg-[#081b33] hover:bg-[#102a4a] text-white text-sm font-medium disabled:opacity-60",
-								children: loggingIn ? "Verifying Credentials..." : "Sign In to Portal"
+								className: "w-full py-3 rounded-md bg-[#081b33] hover:bg-[#102a4a] text-white text-sm font-medium disabled:opacity-60 flex items-center justify-center gap-3",
+								children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: loggingIn ? "Verifying Credentials..." : "Sign In to Portal" }), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+									className: "font-ar text-xs text-[#c5a059]",
+									dir: "rtl",
+									children: "دخول البوابة"
+								})]
 							})
 						]
 					}),
 					/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-						className: "pt-4 border-t border-[rgba(8,27,51,0.08)] flex items-center justify-between text-xs text-[#526071]",
-						children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: "New to Arzan Kuwait?" }), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("button", {
+						className: "pt-4 border-t border-[rgba(8,27,51,0.08)] flex flex-wrap items-center justify-between gap-2 text-xs text-[#526071]",
+						children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: "New to Arzan Kuwait? · عميل جديد؟" }), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("button", {
 							type: "button",
 							onClick: () => onNavigate("register"),
 							className: "font-semibold text-[#081b33] hover:text-[#a9833d]",
-							children: "Submit New Facility Application →"
+							children: "Submit New Facility Application · قدّم طلب تمويل جديد →"
 						})]
 					})
 				]
@@ -46787,6 +47175,19 @@ function App() {
       --tw-ring-offset-color: #fff;
       --tw-ring-offset-shadow: 0 0 #0000;
       --tw-outline-style: solid;
+      --tw-blur: initial;
+      --tw-brightness: initial;
+      --tw-contrast: initial;
+      --tw-grayscale: initial;
+      --tw-hue-rotate: initial;
+      --tw-invert: initial;
+      --tw-opacity: initial;
+      --tw-saturate: initial;
+      --tw-sepia: initial;
+      --tw-drop-shadow: initial;
+      --tw-drop-shadow-color: initial;
+      --tw-drop-shadow-alpha: 100%;
+      --tw-drop-shadow-size: initial;
       --tw-backdrop-blur: initial;
       --tw-backdrop-brightness: initial;
       --tw-backdrop-contrast: initial;
@@ -47158,6 +47559,10 @@ function App() {
     position: relative;
   }
 
+  .static {
+    position: static;
+  }
+
   .sticky {
     position: sticky;
   }
@@ -47168,6 +47573,10 @@ function App() {
 
   .top-0 {
     top: 0;
+  }
+
+  .top-2 {
+    top: calc(var(--spacing) * 2);
   }
 
   .top-2\.5 {
@@ -47204,6 +47613,10 @@ function App() {
 
   .left-0 {
     left: 0;
+  }
+
+  .left-3 {
+    left: calc(var(--spacing) * 3);
   }
 
   .left-3\.5 {
@@ -47260,12 +47673,20 @@ function App() {
     margin-inline: auto;
   }
 
+  .mt-0 {
+    margin-top: 0;
+  }
+
   .mt-0\.5 {
     margin-top: calc(var(--spacing) * .5);
   }
 
   .mt-1 {
     margin-top: var(--spacing);
+  }
+
+  .mt-2 {
+    margin-top: calc(var(--spacing) * 2);
   }
 
   .mt-2\.5 {
@@ -47308,8 +47729,20 @@ function App() {
     display: none;
   }
 
+  .inline {
+    display: inline;
+  }
+
+  .inline-block {
+    display: inline-block;
+  }
+
   .inline-flex {
     display: inline-flex;
+  }
+
+  .table {
+    display: table;
   }
 
   .aspect-\[4\/3\] {
@@ -47320,16 +47753,32 @@ function App() {
     aspect-ratio: 16 / 10;
   }
 
+  .h-0 {
+    height: 0;
+  }
+
   .h-0\.5 {
     height: calc(var(--spacing) * .5);
+  }
+
+  .h-1 {
+    height: var(--spacing);
   }
 
   .h-1\.5 {
     height: calc(var(--spacing) * 1.5);
   }
 
+  .h-2 {
+    height: calc(var(--spacing) * 2);
+  }
+
   .h-2\.5 {
     height: calc(var(--spacing) * 2.5);
+  }
+
+  .h-3 {
+    height: calc(var(--spacing) * 3);
   }
 
   .h-3\.5 {
@@ -47360,8 +47809,16 @@ function App() {
     height: calc(var(--spacing) * 12);
   }
 
+  .h-14 {
+    height: calc(var(--spacing) * 14);
+  }
+
   .h-16 {
     height: calc(var(--spacing) * 16);
+  }
+
+  .h-28 {
+    height: calc(var(--spacing) * 28);
   }
 
   .h-48 {
@@ -47392,8 +47849,16 @@ function App() {
     min-height: 260px;
   }
 
+  .min-h-\[300px\] {
+    min-height: 300px;
+  }
+
   .min-h-screen {
     min-height: 100vh;
+  }
+
+  .w-3 {
+    width: calc(var(--spacing) * 3);
   }
 
   .w-3\.5 {
@@ -47422,6 +47887,10 @@ function App() {
 
   .w-12 {
     width: calc(var(--spacing) * 12);
+  }
+
+  .w-20 {
+    width: calc(var(--spacing) * 20);
   }
 
   .w-44 {
@@ -47484,6 +47953,10 @@ function App() {
     flex-shrink: 0;
   }
 
+  .border-collapse {
+    border-collapse: collapse;
+  }
+
   .rotate-180 {
     rotate: 180deg;
   }
@@ -47494,6 +47967,10 @@ function App() {
 
   .cursor-pointer {
     cursor: pointer;
+  }
+
+  .resize {
+    resize: both;
   }
 
   .grid-cols-1 {
@@ -47812,6 +48289,10 @@ function App() {
     }
   }
 
+  .border-white {
+    border-color: var(--color-white);
+  }
+
   .border-white\/10 {
     border-color: #ffffff1a;
   }
@@ -47819,6 +48300,16 @@ function App() {
   @supports (color: color-mix(in lab, red, red)) {
     .border-white\/10 {
       border-color: color-mix(in oklab, var(--color-white) 10%, transparent);
+    }
+  }
+
+  .border-white\/20 {
+    border-color: #fff3;
+  }
+
+  @supports (color: color-mix(in lab, red, red)) {
+    .border-white\/20 {
+      border-color: color-mix(in oklab, var(--color-white) 20%, transparent);
     }
   }
 
@@ -47973,8 +48464,18 @@ function App() {
     --tw-gradient-stops: var(--tw-gradient-via-stops);
   }
 
+  .to-\[\#081b33\]\/35 {
+    --tw-gradient-to: oklab(22.1203% -.0134281 -.0516263 / .35);
+    --tw-gradient-stops: var(--tw-gradient-via-stops, var(--tw-gradient-position), var(--tw-gradient-from) var(--tw-gradient-from-position), var(--tw-gradient-to) var(--tw-gradient-to-position));
+  }
+
   .to-\[\#081b33\]\/40 {
     --tw-gradient-to: oklab(22.1203% -.0134281 -.0516263 / .4);
+    --tw-gradient-stops: var(--tw-gradient-via-stops, var(--tw-gradient-position), var(--tw-gradient-from) var(--tw-gradient-from-position), var(--tw-gradient-to) var(--tw-gradient-to-position));
+  }
+
+  .to-\[\#081b33\]\/55 {
+    --tw-gradient-to: oklab(22.1203% -.0134281 -.0516263 / .55);
     --tw-gradient-stops: var(--tw-gradient-via-stops, var(--tw-gradient-position), var(--tw-gradient-from) var(--tw-gradient-from-position), var(--tw-gradient-to) var(--tw-gradient-to-position));
   }
 
@@ -47989,6 +48490,10 @@ function App() {
 
   .object-cover {
     object-fit: cover;
+  }
+
+  .p-1 {
+    padding: var(--spacing);
   }
 
   .p-1\.5 {
@@ -48023,6 +48528,10 @@ function App() {
     padding: calc(var(--spacing) * 8);
   }
 
+  .px-2 {
+    padding-inline: calc(var(--spacing) * 2);
+  }
+
   .px-2\.5 {
     padding-inline: calc(var(--spacing) * 2.5);
   }
@@ -48047,6 +48556,10 @@ function App() {
     padding-inline: calc(var(--spacing) * 6);
   }
 
+  .py-1 {
+    padding-block: var(--spacing);
+  }
+
   .py-1\.5 {
     padding-block: calc(var(--spacing) * 1.5);
   }
@@ -48069,6 +48582,10 @@ function App() {
 
   .py-4 {
     padding-block: calc(var(--spacing) * 4);
+  }
+
+  .py-5 {
+    padding-block: calc(var(--spacing) * 5);
   }
 
   .py-6 {
@@ -48197,6 +48714,10 @@ function App() {
   .text-xs {
     font-size: var(--text-xs);
     line-height: var(--tw-leading, var(--text-xs--line-height));
+  }
+
+  .text-\[10px\] {
+    font-size: 10px;
   }
 
   .text-\[11px\] {
@@ -48359,6 +48880,10 @@ function App() {
     text-transform: capitalize;
   }
 
+  .lowercase {
+    text-transform: lowercase;
+  }
+
   .uppercase {
     text-transform: uppercase;
   }
@@ -48368,12 +48893,24 @@ function App() {
     font-variant-numeric: var(--tw-ordinal, ) var(--tw-slashed-zero, ) var(--tw-numeric-figure, ) var(--tw-numeric-spacing, ) var(--tw-numeric-fraction, );
   }
 
+  .underline {
+    text-decoration-line: underline;
+  }
+
   .accent-\[\#081b33\] {
     accent-color: #081b33;
   }
 
+  .opacity-35 {
+    opacity: .35;
+  }
+
   .opacity-40 {
     opacity: .4;
+  }
+
+  .opacity-45 {
+    opacity: .45;
   }
 
   .opacity-70 {
@@ -48387,6 +48924,11 @@ function App() {
 
   .shadow-2xl {
     --tw-shadow: 0 25px 50px -12px var(--tw-shadow-color, #00000040);
+    box-shadow: var(--tw-inset-shadow), var(--tw-inset-ring-shadow), var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow);
+  }
+
+  .shadow-md {
+    --tw-shadow: 0 4px 6px -1px var(--tw-shadow-color, #0000001a), 0 2px 4px -2px var(--tw-shadow-color, #0000001a);
     box-shadow: var(--tw-inset-shadow), var(--tw-inset-ring-shadow), var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow);
   }
 
@@ -48408,6 +48950,15 @@ function App() {
   .outline {
     outline-style: var(--tw-outline-style);
     outline-width: 1px;
+  }
+
+  .blur {
+    --tw-blur: blur(8px);
+    filter: var(--tw-blur, ) var(--tw-brightness, ) var(--tw-contrast, ) var(--tw-grayscale, ) var(--tw-hue-rotate, ) var(--tw-invert, ) var(--tw-saturate, ) var(--tw-sepia, ) var(--tw-drop-shadow, );
+  }
+
+  .filter {
+    filter: var(--tw-blur, ) var(--tw-brightness, ) var(--tw-contrast, ) var(--tw-grayscale, ) var(--tw-hue-rotate, ) var(--tw-invert, ) var(--tw-saturate, ) var(--tw-sepia, ) var(--tw-drop-shadow, );
   }
 
   .backdrop-blur-md {
@@ -48583,6 +49134,10 @@ function App() {
       padding-inline: calc(var(--spacing) * 8);
     }
 
+    .sm\:py-14 {
+      padding-block: calc(var(--spacing) * 14);
+    }
+
     .sm\:py-16 {
       padding-block: calc(var(--spacing) * 16);
     }
@@ -48624,6 +49179,10 @@ function App() {
 
     .md\:col-span-5 {
       grid-column: span 5 / span 5;
+    }
+
+    .md\:w-52 {
+      width: calc(var(--spacing) * 52);
     }
 
     .md\:grid-cols-2 {
@@ -49021,6 +49580,72 @@ h1, h2, .font-display {
   syntax: "*";
   inherits: false;
   initial-value: solid;
+}
+
+@property --tw-blur {
+  syntax: "*";
+  inherits: false
+}
+
+@property --tw-brightness {
+  syntax: "*";
+  inherits: false
+}
+
+@property --tw-contrast {
+  syntax: "*";
+  inherits: false
+}
+
+@property --tw-grayscale {
+  syntax: "*";
+  inherits: false
+}
+
+@property --tw-hue-rotate {
+  syntax: "*";
+  inherits: false
+}
+
+@property --tw-invert {
+  syntax: "*";
+  inherits: false
+}
+
+@property --tw-opacity {
+  syntax: "*";
+  inherits: false
+}
+
+@property --tw-saturate {
+  syntax: "*";
+  inherits: false
+}
+
+@property --tw-sepia {
+  syntax: "*";
+  inherits: false
+}
+
+@property --tw-drop-shadow {
+  syntax: "*";
+  inherits: false
+}
+
+@property --tw-drop-shadow-color {
+  syntax: "*";
+  inherits: false
+}
+
+@property --tw-drop-shadow-alpha {
+  syntax: "<percentage>";
+  inherits: false;
+  initial-value: 100%;
+}
+
+@property --tw-drop-shadow-size {
+  syntax: "*";
+  inherits: false
 }
 
 @property --tw-backdrop-blur {
