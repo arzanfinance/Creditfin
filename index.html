@@ -43839,20 +43839,34 @@ var ApplicationForm = ({ onSuccessLogin, onNavigate, onShowToast }) => {
 							className: "space-y-6",
 							children: [
 								/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-									className: "space-y-1",
-									children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("h2", {
-										className: "font-display text-2xl font-semibold text-[#081b33]",
-										children: "1. Applicant Identity & Portal Email"
+									className: "flex flex-wrap items-start justify-between gap-2",
+									children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+										className: "space-y-1",
+										children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("h2", {
+											className: "font-display text-2xl font-semibold text-[#081b33]",
+											children: "1. Applicant Identity & Portal Email"
+										}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
+											className: "text-sm text-[#526071]",
+											children: "Enter your legal name matching your Kuwait Civil ID and your primary email address."
+										})]
 									}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
-										className: "text-sm text-[#526071]",
-										children: "Enter your legal name matching your Kuwait Civil ID and your primary email address."
+										className: "font-ar text-sm font-semibold text-[#a9833d]",
+										dir: "rtl",
+										children: "١. بيانات الهوية والبريد الإلكتروني"
 									})]
 								}),
 								/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
 									className: "grid grid-cols-1 sm:grid-cols-2 gap-5",
-									children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("label", {
-										className: "block text-xs font-semibold uppercase tracking-wider text-[#526071] mb-1.5",
-										children: "Full Legal Name"
+									children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+										className: "flex items-center justify-between mb-1.5",
+										children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("label", {
+											className: "text-xs font-semibold uppercase tracking-wider text-[#526071]",
+											children: "Full Legal Name"
+										}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+											className: "font-ar text-xs text-[#526071]",
+											dir: "rtl",
+											children: "الاسم الكامل حسب البطاقة المدنية"
+										})]
 									}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("input", {
 										type: "text",
 										required: true,
@@ -43860,9 +43874,16 @@ var ApplicationForm = ({ onSuccessLogin, onNavigate, onShowToast }) => {
 										onChange: (e) => setFullName(e.target.value),
 										placeholder: "e.g. Abdullah Al-Sabah",
 										className: "w-full px-3.5 py-2.5 rounded-md border border-[rgba(8,27,51,0.18)] text-sm text-[#081b33]"
-									})] }), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("label", {
-										className: "block text-xs font-semibold uppercase tracking-wider text-[#526071] mb-1.5",
-										children: "Email Address"
+									})] }), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+										className: "flex items-center justify-between mb-1.5",
+										children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("label", {
+											className: "text-xs font-semibold uppercase tracking-wider text-[#526071]",
+											children: "Email Address"
+										}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+											className: "font-ar text-xs text-[#526071]",
+											dir: "rtl",
+											children: "البريد الإلكتروني"
+										})]
 									}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("input", {
 										type: "email",
 										required: true,
@@ -43878,7 +43899,7 @@ var ApplicationForm = ({ onSuccessLogin, onNavigate, onShowToast }) => {
 										type: "button",
 										onClick: () => onNavigate("login"),
 										className: "text-sm font-medium text-[#526071] hover:text-[#081b33]",
-										children: "Already applied? Client Login"
+										children: "Already applied? Client Login · دخول العميل"
 									}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("button", {
 										type: "submit",
 										disabled: checkingEmail,
@@ -44302,6 +44323,109 @@ var ApplicationForm = ({ onSuccessLogin, onNavigate, onShowToast }) => {
 					]
 				})]
 			}),
+			/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+				className: "grid grid-cols-1 md:grid-cols-3 gap-6",
+				children: [
+					/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+						className: "bg-white rounded-xl border border-[rgba(8,27,51,0.12)] overflow-hidden",
+						children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+							className: "aspect-[16/10] bg-slate-200",
+							children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("img", {
+								src: "./arzan-hospitality.jpg",
+								alt: "Kuwait Hospitality & Real Estate Backing",
+								referrerPolicy: "no-referrer",
+								className: "w-full h-full object-cover"
+							})
+						}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+							className: "p-5 space-y-1.5",
+							children: [
+								/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
+									className: "font-ar text-sm font-bold text-[#a9833d]",
+									dir: "rtl",
+									children: "تسهيلات مدعومة بأصول حقيقية في الكويت"
+								}),
+								/* @__PURE__ */ (0, import_jsx_runtime.jsx)("h3", {
+									className: "font-display text-xl font-semibold text-[#081b33]",
+									children: "KWD 1,000 – 25,000 Range"
+								}),
+								/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
+									className: "text-xs text-[#526071] leading-relaxed",
+									children: "Structured personal & commercial financing with clear 11.9% p.a. reducing terms."
+								})
+							]
+						})]
+					}),
+					/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+						className: "bg-white rounded-xl border border-[rgba(8,27,51,0.12)] overflow-hidden",
+						children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+							className: "aspect-[16/10] bg-slate-200",
+							children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("img", {
+								src: "./arzan-residential.jpg",
+								alt: "Kuwait Residential Capital",
+								referrerPolicy: "no-referrer",
+								className: "w-full h-full object-cover"
+							})
+						}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+							className: "p-5 space-y-1.5",
+							children: [
+								/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
+									className: "font-ar text-sm font-bold text-[#a9833d]",
+									dir: "rtl",
+									children: "أقساط شهرية مريحة من ٩ إلى ٤٨ شهراً"
+								}),
+								/* @__PURE__ */ (0, import_jsx_runtime.jsx)("h3", {
+									className: "font-display text-xl font-semibold text-[#081b33]",
+									children: "Flexible 9–48 Month Tenure"
+								}),
+								/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
+									className: "text-xs text-[#526071] leading-relaxed",
+									children: "Tailored repayment duration aligned with salaried and business cashflows across Kuwait."
+								})
+							]
+						})]
+					}),
+					/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+						className: "bg-white rounded-xl border border-[rgba(8,27,51,0.12)] overflow-hidden",
+						children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+							className: "aspect-[16/10] bg-slate-200",
+							children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("img", {
+								src: "./arzan-kuwait-lounge.jpg",
+								alt: "Arzan Private Client Lounge Kuwait",
+								referrerPolicy: "no-referrer",
+								className: "w-full h-full object-cover"
+							})
+						}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+							className: "p-5 space-y-1.5",
+							children: [
+								/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
+									className: "font-ar text-sm font-bold text-[#a9833d]",
+									dir: "rtl",
+									children: "سرية تامة وتحقق رقمي بالبطاقة المدنية"
+								}),
+								/* @__PURE__ */ (0, import_jsx_runtime.jsx)("h3", {
+									className: "font-display text-xl font-semibold text-[#081b33]",
+									children: "Encrypted Civil ID & IBAN KYC"
+								}),
+								/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
+									className: "text-xs text-[#526071] leading-relaxed",
+									children: "Confidential officer verification in Sharq Financial District with direct IBAN clearing."
+								})
+							]
+						})]
+					})
+				]
+			}),
+			/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+				className: "bg-[#081b33] text-white rounded-xl px-6 py-4 flex flex-col sm:flex-row items-center justify-between gap-2 text-xs",
+				children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+					className: "text-slate-300",
+					children: "All Kuwait Governorates Supported · NBK, KFH, Boubyan, Gulf Bank & CBK"
+				}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+					className: "font-ar text-[#c5a059]",
+					dir: "rtl",
+					children: "تمويل شخصي وتجاري موثق · جميع محافظات دولة الكويت"
+				})]
+			}),
 			camOpen && /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
 				className: "fixed inset-0 z-50 bg-[#081b33]/75 backdrop-blur-sm flex items-center justify-center p-4",
 				children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
@@ -44531,163 +44655,268 @@ var ClientPortal = ({ mode, activeClient, onLoginSuccess, onClientUpdated, onLog
 		onShowToast("Cancellation request recorded.");
 		if (!await syncClientToCloud(updated)) queuePendingSync(updated);
 	};
-	if (mode === "login" || !activeClient) return /* @__PURE__ */ (0, import_jsx_runtime.jsx)("section", {
+	if (mode === "login" || !activeClient) return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("section", {
 		className: "max-w-5xl mx-auto px-4 sm:px-6 py-12 sm:py-16 space-y-6",
-		children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-			className: "bg-white rounded-2xl border border-[rgba(8,27,51,0.12)] shadow-sm overflow-hidden grid grid-cols-1 lg:grid-cols-12",
-			children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-				className: "lg:col-span-5 relative bg-[#081b33] text-white min-h-[300px] flex flex-col justify-between p-8",
-				children: [
-					/* @__PURE__ */ (0, import_jsx_runtime.jsx)("img", {
-						src: "./arzan-kuwait-lounge.jpg",
-						alt: "Arzan Private Client Lounge Kuwait",
-						referrerPolicy: "no-referrer",
-						className: "absolute inset-0 w-full h-full object-cover opacity-45"
-					}),
-					/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "absolute inset-0 bg-gradient-to-t from-[#081b33] via-[#081b33]/75 to-[#081b33]/35" }),
-					/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-						className: "relative flex items-center justify-between gap-2",
-						children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
-							className: "text-[11px] font-semibold uppercase tracking-[0.18em] text-[#c5a059]",
-							children: "Kuwait Client Portal"
-						}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
-							className: "font-ar text-xs font-semibold text-[#c5a059]",
-							dir: "rtl",
-							children: "بوابة عملاء أرزان · الكويت"
-						})]
-					}),
-					/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-						className: "relative space-y-3",
-						children: [
-							/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-								className: "w-20 h-14 rounded-lg overflow-hidden border border-white/25 shadow",
-								children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("img", {
-									src: "./arzan-kuwait-boardroom.jpg",
-									alt: "Kuwait Advisory Boardroom",
-									referrerPolicy: "no-referrer",
-									className: "w-full h-full object-cover"
-								})
-							}),
-							/* @__PURE__ */ (0, import_jsx_runtime.jsx)("h2", {
-								className: "font-display text-3xl font-semibold text-white leading-tight",
-								children: "Access Your Facility & Clearing Wallet"
-							}),
-							/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
-								className: "font-ar text-sm text-[#c5a059]",
-								dir: "rtl",
-								children: "دخول العميل لمتابعة التمويل والمحفظة وجدول الأقساط الشهرية"
-							}),
-							/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
-								className: "text-xs text-slate-300 leading-relaxed",
-								children: "Sign in with your registered email address or AIM Client ID to view approval status, clearing wallet balance, and monthly EMI calendar."
-							})
-						]
-					})
-				]
-			}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-				className: "lg:col-span-7 p-8 sm:p-10 space-y-6",
-				children: [
-					/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-						className: "flex flex-wrap items-start justify-between gap-3",
-						children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-							className: "space-y-1",
-							children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("h1", {
-								className: "font-display text-3xl font-semibold text-[#081b33]",
-								children: "Client Sign In"
-							}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
-								className: "text-sm text-[#526071]",
-								children: "Enter your portal credentials below."
-							})]
-						}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-							className: "text-right",
+		children: [
+			/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+				className: "bg-white rounded-2xl border border-[rgba(8,27,51,0.12)] shadow-sm overflow-hidden grid grid-cols-1 lg:grid-cols-12",
+				children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+					className: "lg:col-span-5 relative bg-[#081b33] text-white min-h-[300px] flex flex-col justify-between p-8",
+					children: [
+						/* @__PURE__ */ (0, import_jsx_runtime.jsx)("img", {
+							src: "./arzan-kuwait-lounge.jpg",
+							alt: "Arzan Private Client Lounge Kuwait",
+							referrerPolicy: "no-referrer",
+							className: "absolute inset-0 w-full h-full object-cover opacity-45"
+						}),
+						/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "absolute inset-0 bg-gradient-to-t from-[#081b33] via-[#081b33]/75 to-[#081b33]/35" }),
+						/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+							className: "relative flex items-center justify-between gap-2",
 							children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
-								className: "font-ar text-lg font-bold text-[#081b33]",
-								dir: "rtl",
-								children: "تسجيل دخول العميل"
+								className: "text-[11px] font-semibold uppercase tracking-[0.18em] text-[#c5a059]",
+								children: "Kuwait Client Portal"
 							}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
-								className: "font-ar text-xs text-[#a9833d]",
+								className: "font-ar text-xs font-semibold text-[#c5a059]",
 								dir: "rtl",
-								children: "أرزان لإدارة الاستثمار"
+								children: "بوابة عملاء أرزان · الكويت"
 							})]
-						})]
-					}),
-					loginError && /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-						className: "p-3.5 rounded-lg bg-red-50 border border-red-200 text-xs text-red-800",
-						children: loginError
-					}),
-					/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("form", {
-						onSubmit: handleLoginSubmit,
-						className: "space-y-4",
-						children: [
-							/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-								className: "flex items-center justify-between mb-1.5",
-								children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("label", {
-									className: "text-xs font-semibold uppercase tracking-wider text-[#526071]",
-									children: "Email or Client ID (AIM-XXXX)"
-								}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-									className: "font-ar text-xs text-[#526071]",
+						}),
+						/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+							className: "relative space-y-3",
+							children: [
+								/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+									className: "w-20 h-14 rounded-lg overflow-hidden border border-white/25 shadow",
+									children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("img", {
+										src: "./arzan-kuwait-boardroom.jpg",
+										alt: "Kuwait Advisory Boardroom",
+										referrerPolicy: "no-referrer",
+										className: "w-full h-full object-cover"
+									})
+								}),
+								/* @__PURE__ */ (0, import_jsx_runtime.jsx)("h2", {
+									className: "font-display text-3xl font-semibold text-white leading-tight",
+									children: "Access Your Facility & Clearing Wallet"
+								}),
+								/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
+									className: "font-ar text-sm text-[#c5a059]",
 									dir: "rtl",
-									children: "البريد الإلكتروني أو رقم العميل"
-								})]
-							}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("input", {
-								type: "text",
-								required: true,
-								value: identifier,
-								onChange: (e) => setIdentifier(e.target.value),
-								placeholder: "name@example.com or AIM-1234",
-								className: "w-full px-3.5 py-2.5 rounded-md border border-[rgba(8,27,51,0.18)] text-sm text-[#081b33]"
-							})] }),
-							/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-								className: "flex items-center justify-between mb-1.5",
-								children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("label", {
-									className: "text-xs font-semibold uppercase tracking-wider text-[#526071]",
-									children: "Portal Password"
-								}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-									className: "font-ar text-xs text-[#526071]",
-									dir: "rtl",
-									children: "كلمة المرور"
+									children: "دخول العميل لمتابعة التمويل والمحفظة وجدول الأقساط الشهرية"
+								}),
+								/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
+									className: "text-xs text-slate-300 leading-relaxed",
+									children: "Sign in with your registered email address or AIM Client ID to view approval status, clearing wallet balance, and monthly EMI calendar."
+								})
+							]
+						})
+					]
+				}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+					className: "lg:col-span-7 p-8 sm:p-10 space-y-6",
+					children: [
+						/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+							className: "flex flex-wrap items-start justify-between gap-3",
+							children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+								className: "space-y-1",
+								children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("h1", {
+									className: "font-display text-3xl font-semibold text-[#081b33]",
+									children: "Client Sign In"
+								}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
+									className: "text-sm text-[#526071]",
+									children: "Enter your portal credentials below."
 								})]
 							}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-								className: "relative",
-								children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("input", {
-									type: showPass ? "text" : "password",
-									required: true,
-									value: password,
-									onChange: (e) => setPassword(e.target.value),
-									placeholder: "Enter password",
-									className: "w-full px-3.5 py-2.5 pr-10 rounded-md border border-[rgba(8,27,51,0.18)] text-sm text-[#081b33]"
-								}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("button", {
-									type: "button",
-									onClick: () => setShowPass(!showPass),
-									"aria-label": "Toggle password visibility",
-									className: "absolute right-3 top-2.5 text-[#526071]",
-									children: showPass ? /* @__PURE__ */ (0, import_jsx_runtime.jsx)(EyeOff, { className: "w-4 h-4" }) : /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Eye, { className: "w-4 h-4" })
-								})]
-							})] }),
-							/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("button", {
-								type: "submit",
-								disabled: loggingIn,
-								className: "w-full py-3 rounded-md bg-[#081b33] hover:bg-[#102a4a] text-white text-sm font-medium disabled:opacity-60 flex items-center justify-center gap-3",
-								children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: loggingIn ? "Verifying Credentials..." : "Sign In to Portal" }), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-									className: "font-ar text-xs text-[#c5a059]",
+								className: "text-right",
+								children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
+									className: "font-ar text-lg font-bold text-[#081b33]",
 									dir: "rtl",
-									children: "دخول البوابة"
+									children: "تسجيل دخول العميل"
+								}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
+									className: "font-ar text-xs text-[#a9833d]",
+									dir: "rtl",
+									children: "أرزان لإدارة الاستثمار"
 								})]
+							})]
+						}),
+						loginError && /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+							className: "p-3.5 rounded-lg bg-red-50 border border-red-200 text-xs text-red-800",
+							children: loginError
+						}),
+						/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("form", {
+							onSubmit: handleLoginSubmit,
+							className: "space-y-4",
+							children: [
+								/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+									className: "flex items-center justify-between mb-1.5",
+									children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("label", {
+										className: "text-xs font-semibold uppercase tracking-wider text-[#526071]",
+										children: "Email or Client ID (AIM-XXXX)"
+									}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+										className: "font-ar text-xs text-[#526071]",
+										dir: "rtl",
+										children: "البريد الإلكتروني أو رقم العميل"
+									})]
+								}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("input", {
+									type: "text",
+									required: true,
+									value: identifier,
+									onChange: (e) => setIdentifier(e.target.value),
+									placeholder: "name@example.com or AIM-1234",
+									className: "w-full px-3.5 py-2.5 rounded-md border border-[rgba(8,27,51,0.18)] text-sm text-[#081b33]"
+								})] }),
+								/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+									className: "flex items-center justify-between mb-1.5",
+									children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("label", {
+										className: "text-xs font-semibold uppercase tracking-wider text-[#526071]",
+										children: "Portal Password"
+									}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+										className: "font-ar text-xs text-[#526071]",
+										dir: "rtl",
+										children: "كلمة المرور"
+									})]
+								}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+									className: "relative",
+									children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("input", {
+										type: showPass ? "text" : "password",
+										required: true,
+										value: password,
+										onChange: (e) => setPassword(e.target.value),
+										placeholder: "Enter password",
+										className: "w-full px-3.5 py-2.5 pr-10 rounded-md border border-[rgba(8,27,51,0.18)] text-sm text-[#081b33]"
+									}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("button", {
+										type: "button",
+										onClick: () => setShowPass(!showPass),
+										"aria-label": "Toggle password visibility",
+										className: "absolute right-3 top-2.5 text-[#526071]",
+										children: showPass ? /* @__PURE__ */ (0, import_jsx_runtime.jsx)(EyeOff, { className: "w-4 h-4" }) : /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Eye, { className: "w-4 h-4" })
+									})]
+								})] }),
+								/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("button", {
+									type: "submit",
+									disabled: loggingIn,
+									className: "w-full py-3 rounded-md bg-[#081b33] hover:bg-[#102a4a] text-white text-sm font-medium disabled:opacity-60 flex items-center justify-center gap-3",
+									children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: loggingIn ? "Verifying Credentials..." : "Sign In to Portal" }), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+										className: "font-ar text-xs text-[#c5a059]",
+										dir: "rtl",
+										children: "دخول البوابة"
+									})]
+								})
+							]
+						}),
+						/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+							className: "pt-4 border-t border-[rgba(8,27,51,0.08)] flex flex-wrap items-center justify-between gap-2 text-xs text-[#526071]",
+							children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: "New to Arzan Kuwait? · عميل جديد؟" }), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("button", {
+								type: "button",
+								onClick: () => onNavigate("register"),
+								className: "font-semibold text-[#081b33] hover:text-[#a9833d]",
+								children: "Submit New Facility Application · قدّم طلب تمويل جديد →"
+							})]
+						})
+					]
+				})]
+			}),
+			/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+				className: "grid grid-cols-1 md:grid-cols-3 gap-6",
+				children: [
+					/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+						className: "bg-white rounded-xl border border-[rgba(8,27,51,0.12)] overflow-hidden",
+						children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+							className: "aspect-[16/10] bg-slate-200",
+							children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("img", {
+								src: "./arzan-kuwait-wealth.jpg",
+								alt: "Arzan Private Wealth Advisory Kuwait",
+								referrerPolicy: "no-referrer",
+								className: "w-full h-full object-cover"
 							})
-						]
+						}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+							className: "p-5 space-y-1.5",
+							children: [
+								/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
+									className: "font-ar text-sm font-bold text-[#a9833d]",
+									dir: "rtl",
+									children: "إدارة الثروات والتمويل الخاص"
+								}),
+								/* @__PURE__ */ (0, import_jsx_runtime.jsx)("h3", {
+									className: "font-display text-xl font-semibold text-[#081b33]",
+									children: "Private Clearing Desk"
+								}),
+								/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
+									className: "text-xs text-[#526071] leading-relaxed",
+									children: "Direct KWD wallet clearing & real-time IBAN settlement monitoring for Kuwait residents."
+								})
+							]
+						})]
 					}),
 					/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-						className: "pt-4 border-t border-[rgba(8,27,51,0.08)] flex flex-wrap items-center justify-between gap-2 text-xs text-[#526071]",
-						children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: "New to Arzan Kuwait? · عميل جديد؟" }), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("button", {
-							type: "button",
-							onClick: () => onNavigate("register"),
-							className: "font-semibold text-[#081b33] hover:text-[#a9833d]",
-							children: "Submit New Facility Application · قدّم طلب تمويل جديد →"
+						className: "bg-white rounded-xl border border-[rgba(8,27,51,0.12)] overflow-hidden",
+						children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+							className: "aspect-[16/10] bg-slate-200",
+							children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("img", {
+								src: "./arzan-credit.jpg",
+								alt: "Kuwait Regulated KWD Credit Facilities",
+								referrerPolicy: "no-referrer",
+								className: "w-full h-full object-cover"
+							})
+						}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+							className: "p-5 space-y-1.5",
+							children: [
+								/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
+									className: "font-ar text-sm font-bold text-[#a9833d]",
+									dir: "rtl",
+									children: "تسهيلات مرنة بالدينار الكويتي"
+								}),
+								/* @__PURE__ */ (0, import_jsx_runtime.jsx)("h3", {
+									className: "font-display text-xl font-semibold text-[#081b33]",
+									children: "Transparent EMI Schedules"
+								}),
+								/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
+									className: "text-xs text-[#526071] leading-relaxed",
+									children: "Inspect monthly principal & profit breakdowns from 9 to 48 months inside your portal."
+								})
+							]
+						})]
+					}),
+					/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+						className: "bg-white rounded-xl border border-[rgba(8,27,51,0.12)] overflow-hidden",
+						children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+							className: "aspect-[16/10] bg-slate-200",
+							children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("img", {
+								src: "./arzan-kuwait-boardroom.jpg",
+								alt: "Sharq Kuwait Advisory Boardroom",
+								referrerPolicy: "no-referrer",
+								className: "w-full h-full object-cover"
+							})
+						}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+							className: "p-5 space-y-1.5",
+							children: [
+								/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
+									className: "font-ar text-sm font-bold text-[#a9833d]",
+									dir: "rtl",
+									children: "خدمة العملاء والاستشارات · شرق، الكويت"
+								}),
+								/* @__PURE__ */ (0, import_jsx_runtime.jsx)("h3", {
+									className: "font-display text-xl font-semibold text-[#081b33]",
+									children: "Dedicated Kuwait Advisory"
+								}),
+								/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
+									className: "text-xs text-[#526071] leading-relaxed",
+									children: "Sharq Financial District underwriting team supporting NBK, KFH, Boubyan & Gulf Bank IBANs."
+								})
+							]
 						})]
 					})
 				]
-			})]
-		})
+			}),
+			/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+				className: "bg-[#081b33] text-white rounded-xl px-6 py-4 flex flex-col sm:flex-row items-center justify-between gap-2 text-xs",
+				children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+					className: "text-slate-300",
+					children: "Arzan Investment Management · Encrypted Kuwait Client Ledger"
+				}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+					className: "font-ar text-[#c5a059]",
+					dir: "rtl",
+					children: "نظام مشفر بالكامل لحماية بيانات العملاء الكرام في دولة الكويت"
+				})]
+			})
+		]
 	});
 	const canWithdraw = (activeClient.status === "Approved" || activeClient.status === "Disbursed") && activeClient.walletLock === "unlocked" && Number(activeClient.walletBalance || 0) > 0;
 	const tabs = [
@@ -47845,10 +48074,6 @@ function App() {
     max-height: 90vh;
   }
 
-  .min-h-\[260px\] {
-    min-height: 260px;
-  }
-
   .min-h-\[300px\] {
     min-height: 300px;
   }
@@ -49140,11 +49365,6 @@ function App() {
 
     .sm\:py-16 {
       padding-block: calc(var(--spacing) * 16);
-    }
-
-    .sm\:text-3xl {
-      font-size: var(--text-3xl);
-      line-height: var(--tw-leading, var(--text-3xl--line-height));
     }
 
     .sm\:text-4xl {
